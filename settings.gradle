@@ -1,0 +1,2 @@
+rootProject.name = "HisuMal"
+include ':app'

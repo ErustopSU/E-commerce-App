@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginFragment">
 
     <ImageView
         android:id="@+id/relativeLayout"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/undraw_enter_uhqk"
+        android:src="@drawable/bg_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -36,7 +36,7 @@
         app:hintTextColor="#EF984B">
 
         <EditText
-            android:id="@+id/edt_username"
+            android:id="@+id/edt_regis_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
@@ -64,7 +64,7 @@
         app:hintTextColor="#EF984B">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_pwd"
+            android:id="@+id/edt_regis_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_signup"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
@@ -104,17 +104,17 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_forgot_pwd" />
 
     <TextView
-        android:id="@+id/txt_no_account"
+        android:id="@+id/txt_have_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:fontFamily="@font/roboto"
-        android:text="Don't have an account? "
+        android:text="Don't have any accounts? "
         android:textColor="#e67e22"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintEnd_toEndOf="@+id/btn_signup"
+        app:layout_constraintStart_toStartOf="@+id/btn_signup"
         app:layout_constraintTop_toBottomOf="@+id/btn_login_fb" />
 
     <ImageButton
@@ -122,9 +122,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login"
+        app:layout_constraintEnd_toEndOf="@+id/btn_signup"
         app:layout_constraintHorizontal_bias="0.344"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintStart_toStartOf="@+id/btn_signup"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:srcCompat="@drawable/fb_blue" />
 
@@ -136,10 +136,10 @@
         android:text="Or"
         android:textSize="20dp"
         android:fontFamily="@font/roboto"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login"
+        app:layout_constraintEnd_toEndOf="@+id/btn_signup"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintStart_toStartOf="@+id/btn_signup"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
 
     <ImageButton
         android:id="@+id/btn_login_google"
@@ -153,5 +153,30 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/google" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="100dp"
+        android:layout_height="2dp"
+        android:layout_marginEnd="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_signup"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="100dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/btn_signup"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

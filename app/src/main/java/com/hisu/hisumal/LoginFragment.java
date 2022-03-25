@@ -1,8 +1,11 @@
 package com.hisu.hisumal;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,9 @@ public class LoginFragment extends Fragment {
     private TextView txtNoAccount;
     private Button btnLogin;
 
+    private static final String BTN_DISABLE = "#bdc3c7";
+    private static final String BTN_ENABLE = "#EF984B";
+
     public LoginFragment(FrameLayout frameLayout) {
         this.frameLayout = frameLayout;
     }
@@ -44,6 +50,9 @@ public class LoginFragment extends Fragment {
         addActionForNoAccountEvent();
         addActionForBtnLogin();
 
+        addListenerForEditText(mEdtUserName);
+        addListenerForEditText(mEdtPwd);
+
         return view;
     }
 
@@ -55,6 +64,12 @@ public class LoginFragment extends Fragment {
         mEdtPwd = view.findViewById(R.id.edt_pwd);
 
         btnLogin = view.findViewById(R.id.btn_login);
+        changeButtonState(false, BTN_DISABLE);
+    }
+
+    private void changeButtonState(boolean state, String color) {
+        btnLogin.setEnabled(state);
+        btnLogin.setBackgroundColor(Color.parseColor(color));
     }
 
     private void addActionForNoAccountEvent() {
@@ -67,11 +82,56 @@ public class LoginFragment extends Fragment {
 
     private void addActionForBtnLogin() {
         btnLogin.setOnClickListener(view1 -> {
+
+            if (!isValidAccount(mEdtUserName.getText().toString().trim(), mEdtPwd.getText().toString().trim()))
+                return;
+
             Intent intent = new Intent(getContext(), HomeActivity.class);
+
             intent.putExtra(HomeActivity.TEST_INTENT_KEY, "Login Successfully!");
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
             startActivity(intent);
             getActivity().finish();
+        });
+    }
+
+    private boolean isValidAccount(String userName, String password) {
+        if (!userName.matches("[a-zA-Z0-9]{0,12}")) {
+            mEdtUserName.setError("Invalid Username! Please check your Username!");
+            mEdtUserName.requestFocus();
+            return false;
+        }
+
+        //Mock up user account
+        if (!(userName.equals("harry") && password.equals("123Nguyen"))) {
+            mEdtUserName.setError("Username or Password not correct!");
+            mEdtUserName.requestFocus();
+            return false;
+        }
+
+        //Todo: Add logic to check for user account here
+
+        return true;
+    }
+
+    private void addListenerForEditText(TextInputEditText editText) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!mEdtPwd.getText().toString().trim().isEmpty() && !mEdtUserName.getText().toString().trim().isEmpty())
+                    changeButtonState(true, BTN_ENABLE);
+                else
+                    changeButtonState(false, BTN_DISABLE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
         });
     }
 }

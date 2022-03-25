@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "519529315117",
+    "project_id": "hisumaldb",
+    "storage_bucket": "hisumaldb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519529315117:android:dff57ea8cdaf6b5423f1a4",
+        "android_client_info": {
+          "package_name": "com.hisu.hisumal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519529315117-q0q4v2u6e96at1qkbaqiilgjm236iivn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hisu.hisumal",
+            "certificate_hash": "e19b1c4a3e795628beb104d939a5b038da65cf2e"
+          }
+        },
+        {
+          "client_id": "519529315117-2mt1rrqb9otrlli08g5kosjfnnk9g6ts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNFKrR0ZlJJq3qxJ27wKnBr_i2gHHEjIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519529315117-2mt1rrqb9otrlli08g5kosjfnnk9g6ts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,7 +22,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.jetbrains.annotations.NotNull;
 
 public class LoginFragment extends Fragment {
-
+    
     private FrameLayout frameLayout;
     private TextInputEditText mEdtUserName, mEdtPwd;
     private TextView txtNoAccount;
@@ -111,7 +111,6 @@ public class LoginFragment extends Fragment {
         }
 
         //Todo: Add logic to check for user account here
-
         return true;
     }
 

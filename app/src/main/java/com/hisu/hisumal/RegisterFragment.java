@@ -78,7 +78,6 @@ public class RegisterFragment extends Fragment {
                 return;
 
             Intent intent = new Intent(getContext(), HomeActivity.class);
-            intent.putExtra(HomeActivity.TEST_INTENT_KEY, "Registered Successfully!");
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             getActivity().finish();

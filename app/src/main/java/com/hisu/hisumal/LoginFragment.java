@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment {
         mEdtPwd = view.findViewById(R.id.edt_pwd);
 
         btnLogin = view.findViewById(R.id.btn_login);
-        changeButtonState(false, BTN_DISABLE);
+//        changeButtonState(false, BTN_DISABLE);
     }
 
     private void changeButtonState(boolean state, String color) {
@@ -83,12 +83,11 @@ public class LoginFragment extends Fragment {
     private void addActionForBtnLogin() {
         btnLogin.setOnClickListener(view1 -> {
 
-            if (!isValidAccount(mEdtUserName.getText().toString().trim(), mEdtPwd.getText().toString().trim()))
-                return;
+            //Todo: Uncomment this line to check for log in logic, to ez to test, i comment this line :v
+//            if (!isValidAccount(mEdtUserName.getText().toString().trim(), mEdtPwd.getText().toString().trim()))
+//                return;
 
             Intent intent = new Intent(getContext(), HomeActivity.class);
-
-            intent.putExtra(HomeActivity.TEST_INTENT_KEY, "Login Successfully!");
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
             startActivity(intent);

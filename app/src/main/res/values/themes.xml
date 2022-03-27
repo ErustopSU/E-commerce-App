@@ -14,7 +14,8 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="NavigationViewTextSize">
-        <item name="android:textSize">24dp</item>
+    <style name="NavigationViewStyle">
+        <item name="android:textSize">24dp</item> <!-- menu item text size-->
+        <item name="android:listPreferredItemHeightSmall">40dp</item><!-- menu item height-->
     </style>
 </resources>

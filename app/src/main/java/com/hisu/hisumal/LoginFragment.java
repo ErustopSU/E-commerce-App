@@ -18,13 +18,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
 public class LoginFragment extends Fragment {
-    
+
     private FrameLayout frameLayout;
     private TextInputEditText mEdtUserName, mEdtPwd;
+    private TextInputLayout mTxtInputLayoutPwd;
     private TextView txtNoAccount;
     private Button btnLogin;
 
@@ -53,6 +55,8 @@ public class LoginFragment extends Fragment {
         addListenerForEditText(mEdtUserName);
         addListenerForEditText(mEdtPwd);
 
+        changeEndIconStateOnFocusEditText(mEdtPwd, mTxtInputLayoutPwd);
+
         return view;
     }
 
@@ -62,6 +66,8 @@ public class LoginFragment extends Fragment {
 
         mEdtUserName = view.findViewById(R.id.edt_username);
         mEdtPwd = view.findViewById(R.id.edt_pwd);
+
+        mTxtInputLayoutPwd = view.findViewById(R.id.textInputLayout2);
 
         btnLogin = view.findViewById(R.id.btn_login);
 //        changeButtonState(false, BTN_DISABLE);
@@ -130,6 +136,12 @@ public class LoginFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
             }
+        });
+    }
+
+    private void changeEndIconStateOnFocusEditText(TextInputEditText editText, TextInputLayout textInputLayout) {
+        editText.setOnFocusChangeListener((view, isFocus) -> {
+            textInputLayout.setEndIconActivated(isFocus);
         });
     }
 }

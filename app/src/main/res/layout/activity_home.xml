@@ -5,8 +5,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="start"
-    tools:context=".HomeActivity">
+    tools:context=".HomeActivity"
+    tools:openDrawer="start">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,48 +15,67 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/my_toolbar"
                 android:layout_width="match_parent"
-                android:theme="@style/ThemeOverlay.AppCompat.Light"
-                android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                android:background="@color/primaryColor"
-                app:titleTextColor="@color/white"
-                android:layout_height="?attr/actionBarSize" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                android:elevation="4dp"
+
+                app:menu="@menu/toolbar_menu"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:titleTextColor="@color/white">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/search_bar_background"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:ellipsize="start"
+                    android:fontFamily="@font/roboto"
+                    android:hint="Search..."
+                    android:maxLines="1"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="6dp"
+                    android:textColor="@color/textColor"
+                    android:textCursorDrawable="@drawable/search_cursor"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="24dp" />
+            </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/homepage_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottom_nav"/>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemIconSize="25dp"
-            app:itemIconTint="@color/bottom_nav_state"
-            app:itemTextColor="@color/bottom_nav_state"
-            app:menu="@menu/bottom_nav"
-            android:layout_alignParentBottom="true"/>
-
+            android:layout_above="@+id/bottom_nav" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/my_navigation_view"
-        android:layout_gravity="start"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         app:headerLayout="@layout/layout_navigation_drawer_header"
-        app:menu="@menu/navigation_drawer"
-        app:itemTextAppearance="@style/NavigationViewStyle">
+        app:itemTextAppearance="@style/NavigationViewStyle"
+        app:menu="@menu/navigation_drawer">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="8dp">
-            <include layout="@layout/layout_navigation_follow_us"/>
+
+            <include layout="@layout/layout_navigation_follow_us" />
         </RelativeLayout>
     </com.google.android.material.navigation.NavigationView>
 

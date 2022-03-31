@@ -16,11 +16,13 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterFragment extends Fragment {
 
     private FrameLayout frameLayout;
-    private TextInputEditText mEdtUserName, mEdtPwd, mEdtConfirmPwd;
+    private TextInputLayout mTxtLayoutPwd, mTxtLayoutConfirmPwd;
+    private TextInputEditText mEdtEmail, mEdtUserName, mEdtPwd, mEdtConfirmPwd;
     private TextView txtHaveAccount;
     private Button btnSignUp;
 
@@ -44,9 +46,13 @@ public class RegisterFragment extends Fragment {
         addActionForHaveAccountEvent();
         addActionForBtnSignUp();
 
+        addListenerForEditText(mEdtEmail);
         addListenerForEditText(mEdtUserName);
         addListenerForEditText(mEdtPwd);
         addListenerForEditText(mEdtConfirmPwd);
+
+        changeEndIconStateOnFocusEditText(mEdtPwd, mTxtLayoutPwd);
+        changeEndIconStateOnFocusEditText(mEdtConfirmPwd, mTxtLayoutConfirmPwd);
 
         return view;
     }
@@ -55,9 +61,13 @@ public class RegisterFragment extends Fragment {
         txtHaveAccount = view.findViewById(R.id.txt_have_account);
         txtHaveAccount.append(Html.fromHtml("<u>Login now!</u>"));
 
+        mEdtEmail = view.findViewById(R.id.edt_regis_email);
         mEdtUserName = view.findViewById(R.id.edt_regis_username);
         mEdtPwd = view.findViewById(R.id.edt_regis_pwd);
         mEdtConfirmPwd = view.findViewById(R.id.edt_confirm_pass);
+
+        mTxtLayoutPwd = view.findViewById(R.id.textInputLayout2);
+        mTxtLayoutConfirmPwd = view.findViewById(R.id.textInputLayout3);
 
         btnSignUp = view.findViewById(R.id.btn_signup);
         changeButtonState(false, BTN_DISABLE);
@@ -97,7 +107,7 @@ public class RegisterFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!mEdtPwd.getText().toString().trim().isEmpty() && !mEdtUserName.getText().toString().trim().isEmpty()
+                if (!mEdtEmail.getText().toString().trim().isEmpty() && !mEdtPwd.getText().toString().trim().isEmpty() && !mEdtUserName.getText().toString().trim().isEmpty()
                         && !mEdtConfirmPwd.getText().toString().trim().isEmpty())
                     changeButtonState(true, BTN_ENABLE);
                 else
@@ -107,6 +117,12 @@ public class RegisterFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
             }
+        });
+    }
+
+    private void changeEndIconStateOnFocusEditText(TextInputEditText editText, TextInputLayout textInputLayout) {
+        editText.setOnFocusChangeListener((view, isFocus) -> {
+            textInputLayout.setEndIconActivated(isFocus);
         });
     }
 

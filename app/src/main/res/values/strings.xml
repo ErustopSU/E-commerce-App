@@ -21,4 +21,16 @@
     <string name="nav_log_out">Log out</string>
     <string name="open_navigation_drawer">Open Navigation Drawer</string>
     <string name="close_navigation_drawer">Close Navigation Drawer</string>
+
+    //App
+    <string name="email">Email Address</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login_user_name">Username or Email Address</string>
+    <string name="regis_user_name">Username (Ex: Harry123)</string>
+    <string name="password">Password</string>
+    <string name="confirm_pwd">Confirm Password</string>
+    <string name="forgot_pwd">Forgot Password?</string>
+    <string name="have_account">Already have an account? </string>
+    <string name="no_account">Don\'t have any accounts? </string>
 </resources>

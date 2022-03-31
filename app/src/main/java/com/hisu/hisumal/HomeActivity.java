@@ -1,16 +1,21 @@
 package com.hisu.hisumal;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -29,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String GITHUB_URL = "Demo: Follow me on github";
     private static final String YTB_URL = "Demo: Follow me on youtube";
 
-    private String []followUrls = {FACEBOOK_URL, GITHUB_URL, YTB_URL};
+    private String[] followUrls = {FACEBOOK_URL, GITHUB_URL, YTB_URL};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         btnFollowGit = mDrawerLayout.findViewById(R.id.follow_us_on_git);
         btnFollowYT = mDrawerLayout.findViewById(R.id.follow_us_on_yt);
 
-        socialMedia = new CircleImageView[] {btnFollowFb, btnFollowGit, btnFollowYT};
+        socialMedia = new CircleImageView[]{btnFollowFb, btnFollowGit, btnFollowYT};
 
         mNavigationView = findViewById(R.id.my_navigation_view);
 
@@ -69,11 +74,18 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initNavigationDrawer() {
         setSupportActionBar(mToolbar);
+        ActionBar mActionBar = getSupportActionBar();
+
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
                 R.string.open_navigation_drawer, R.string.close_navigation_drawer);
 
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+        //Change NavigationView Toggle drawable icon
+        mActionBar.setHomeButtonEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeAsUpIndicator(R.drawable.ic_menubar);
     }
 
     private void openApp(String appName) {
@@ -87,5 +99,19 @@ public class HomeActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         else
             super.onBackPressed();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @SuppressLint("UnsafeOptInUsageError")
+    public void updateCartQuantityNotification(int quantity) {
+        BadgeDrawable badgeDrawable = BadgeDrawable.create(HomeActivity.this);
+        badgeDrawable.setNumber(badgeDrawable.getNumber() + 1);
+        BadgeUtils.attachBadgeDrawable(badgeDrawable, mToolbar, R.id.toolbar_cart);
     }
 }

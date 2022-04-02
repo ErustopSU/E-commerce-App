@@ -8,10 +8,10 @@
     tools:context=".HomeActivity"
     tools:openDrawer="start">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -56,9 +56,8 @@
         <FrameLayout
             android:id="@+id/homepage_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bottom_nav" />
-    </RelativeLayout>
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/my_navigation_view"
@@ -68,15 +67,12 @@
         app:headerLayout="@layout/layout_navigation_drawer_header"
         app:itemTextAppearance="@style/NavigationViewStyle"
         app:menu="@menu/navigation_drawer">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="8dp">
-
             <include layout="@layout/layout_navigation_follow_us" />
         </RelativeLayout>
     </com.google.android.material.navigation.NavigationView>
-
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.navigation.NavigationView;
+import com.hisu.hisumal.fragment.HomeFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,12 +50,16 @@ public class HomeActivity extends AppCompatActivity {
             socialMedia[i].setOnClickListener(view -> openApp(followUrls[finalI]));
         }
 
-        mNavigationView.setNavigationItemSelectedListener(item -> {
-            int selectedItemID = item.getItemId();
+        //Todo: add event for navigation item click
+//        mNavigationView.setNavigationItemSelectedListener(item -> {
+//            int selectedItemID = item.getItemId();
+//
+//            mDrawerLayout.closeDrawer(GravityCompat.START);
+//            return true;
+//        });
 
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-        });
+        getSupportFragmentManager().beginTransaction()
+                .add(mFragmentContainer.getId(), new HomeFragment()).commit();
     }
 
     private void initUI() {
@@ -113,5 +118,10 @@ public class HomeActivity extends AppCompatActivity {
         BadgeDrawable badgeDrawable = BadgeDrawable.create(HomeActivity.this);
         badgeDrawable.setNumber(badgeDrawable.getNumber() + 1);
         BadgeUtils.attachBadgeDrawable(badgeDrawable, mToolbar, R.id.toolbar_cart);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

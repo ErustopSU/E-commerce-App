@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.model.SliderItem;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class SliderAdapter extends PagerAdapter {
+public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
 
     private List<SliderItem> sliderItems;
 
@@ -26,32 +26,31 @@ public class SliderAdapter extends PagerAdapter {
     @NonNull
     @NotNull
     @Override
-    public Object instantiateItem(@NonNull @NotNull ViewGroup container, int position) {
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.layout_banner_slider_item, container, false);
-
-        SliderItem sliderItem = sliderItems.get(position);
-
-        ImageView sliderImg = view.findViewById(R.id.slider_item_img);
-        sliderImg.setImageResource(sliderItem.getImageResource());
-
-        container.addView(view);
-
-        return view;
+    public SliderViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.layout_banner_slider_item, parent, false);
+        return new SliderViewHolder(view);
     }
 
     @Override
-    public int getCount() {
+    public void onBindViewHolder(@NonNull @NotNull SliderViewHolder holder, int position) {
+        SliderItem sliderItem = sliderItems.get(position);
+        holder.sliderImg.setImageResource(sliderItem.getImageResource());
+    }
+
+    @Override
+    public int getItemCount() {
         if (sliderItems == null || sliderItems.isEmpty()) return 0;
         return sliderItems.size();
     }
 
-    @Override
-    public boolean isViewFromObject(@NonNull @NotNull View view, @NonNull @NotNull Object object) {
-        return view == object;
-    }
+    public class SliderViewHolder extends RecyclerView.ViewHolder {
 
-    @Override
-    public void destroyItem(@NonNull @NotNull ViewGroup container, int position, @NonNull @NotNull Object object) {
-        container.removeView((View) object);
+        private ImageView sliderImg;
+
+        public SliderViewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+            sliderImg = itemView.findViewById(R.id.slider_item_img);
+        }
     }
 }

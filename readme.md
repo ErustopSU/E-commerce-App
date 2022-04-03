@@ -1,4 +1,5 @@
-# Screenshots:
-![1](https://user-images.githubusercontent.com/78833363/159491781-fc4b1a85-c17c-4254-8d26-23d41fe3175f.png)
+> ## Login Screen
+![login](https://user-images.githubusercontent.com/78833363/161409444-dd7c4b95-899d-4cb3-ac47-1bc38951da9a.gif)
 
-![2](https://user-images.githubusercontent.com/78833363/159491785-d94361ac-f9cd-44e7-adbc-cd4091c1953a.png)
+> ## Homepage
+![home_page](https://user-images.githubusercontent.com/78833363/161409441-37e90653-d8a5-44af-a779-5c54d6e7de52.gif)

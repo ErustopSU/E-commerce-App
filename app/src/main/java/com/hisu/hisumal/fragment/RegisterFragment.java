@@ -1,4 +1,4 @@
-package com.hisu.hisumal;
+package com.hisu.hisumal.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,6 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.hisu.hisumal.HomeActivity;
+import com.hisu.hisumal.R;
+import com.hisu.hisumal.fragment.LoginFragment;
 
 public class RegisterFragment extends Fragment {
 

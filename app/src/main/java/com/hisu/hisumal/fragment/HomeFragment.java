@@ -7,37 +7,51 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.hisu.hisumal.R;
+import com.hisu.hisumal.adapter.ProductAdapter;
 import com.hisu.hisumal.adapter.SliderAdapter;
+import com.hisu.hisumal.model.Product;
 import com.hisu.hisumal.model.SliderItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import me.relex.circleindicator.CircleIndicator;
+import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeFragment extends Fragment {
 
-    public static final long DELAY_TIME = 3 * 1000; //secs
+    private static final long DELAY_TIME = 3 * 1000; //secs
 
-    private ViewPager bannerViewPager;
-    private CircleIndicator circleIndicator;
+    //Banner Slider
+    private ViewPager2 bannerViewPager;
+    private CircleIndicator3 circleIndicator;
     private List<SliderItem> sliderItems;
-
     private Handler mBannerSliderHandler;
     private Runnable mBannerRunnable;
+
+    //Product List
+    private RecyclerView productRecyclerView;
+    private List<Product> productList;
+    private ProductAdapter productAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         initFragmentUI(view);
-        initSliderViewPager();
 
+        //Banner Slider
+        initSliderViewPager();
         startBannerSlider();
         addAutoRunEventForViewPager();
+
+        //Product List
+        productRecyclerView.setAdapter(productAdapter);
+        productRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         return view;
     }
@@ -54,6 +68,38 @@ public class HomeFragment extends Fragment {
             else
                 bannerViewPager.setCurrentItem(bannerViewPager.getCurrentItem() + 1);
         };
+
+        productRecyclerView = view.findViewById(R.id.new_product_recycler_view);
+        productList = initProductData();
+        productAdapter = new ProductAdapter(getActivity(), productList);
+    }
+
+    //Todo: change method to fetch data from database or api
+    private List<Product> initProductData() {
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product(products.size() + 1, R.drawable.laptop_1,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, false));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_2,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, false));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_3,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_4,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, false));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_5,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true));
+
+        return products;
     }
 
     private List<SliderItem> initSliderItems() {
@@ -77,19 +123,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void addAutoRunEventForViewPager() {
-        bannerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
+        bannerViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 mBannerSliderHandler.removeCallbacks(mBannerRunnable);
                 startBannerSlider();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
             }
         });
     }

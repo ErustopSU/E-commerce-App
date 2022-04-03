@@ -22,6 +22,7 @@ public class Product {
     private double price;
     private double discount;
     private boolean isFreeShipping;
+    private double rate;
 
     public String getPriceFormat() {
         return "đ " + new DecimalFormat("#,###").format(getPrice());

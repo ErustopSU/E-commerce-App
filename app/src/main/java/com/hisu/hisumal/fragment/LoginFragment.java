@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment {
 
     private void initUI(View view) {
         txtNoAccount = view.findViewById(R.id.txt_have_account);
-        txtNoAccount.append(Html.fromHtml("<u>Sign up now!</u>"));
+        txtNoAccount.append(Html.fromHtml(" <u>Sign up now!</u>"));
 
         mEdtUserName = view.findViewById(R.id.edt_username);
         mEdtPwd = view.findViewById(R.id.edt_pwd);

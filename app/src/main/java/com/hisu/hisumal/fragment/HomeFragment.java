@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.ProductAdapter;
+import com.hisu.hisumal.adapter.ProductTopSellAdapter;
 import com.hisu.hisumal.adapter.SliderAdapter;
 import com.hisu.hisumal.model.Product;
 import com.hisu.hisumal.model.SliderItem;
@@ -33,6 +37,9 @@ public class HomeFragment extends Fragment {
     private Handler mBannerSliderHandler;
     private Runnable mBannerRunnable;
 
+    //Top sell list
+    private RecyclerView topSellRecyclerView;
+
     //Product List
     private RecyclerView productRecyclerView;
     private List<Product> productList;
@@ -48,6 +55,10 @@ public class HomeFragment extends Fragment {
         initSliderViewPager();
         startBannerSlider();
         addAutoRunEventForViewPager();
+
+        //Product Top Sell
+        topSellRecyclerView.setAdapter(new ProductTopSellAdapter(getActivity(), productList));
+        topSellRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
 
         //Product List
         productRecyclerView.setAdapter(productAdapter);
@@ -69,7 +80,9 @@ public class HomeFragment extends Fragment {
                 bannerViewPager.setCurrentItem(bannerViewPager.getCurrentItem() + 1);
         };
 
-        productRecyclerView = view.findViewById(R.id.new_product_recycler_view);
+        topSellRecyclerView = view.findViewById(R.id.top_sell_recycler_view);
+
+        productRecyclerView = view.findViewById(R.id.list_product_recycler_view);
         productList = initProductData();
         productAdapter = new ProductAdapter(getActivity(), productList);
     }
@@ -81,23 +94,51 @@ public class HomeFragment extends Fragment {
         products.add(new Product(products.size() + 1, R.drawable.laptop_1,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, false));
+                "ASUS", "Laptop", 20000000, 15, false, 4.5));
         products.add(new Product(products.size() + 1, R.drawable.laptop_2,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, false));
+                "ASUS", "Laptop", 20000000, 15, false, 5));
         products.add(new Product(products.size() + 1, R.drawable.laptop_3,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, true));
+                "ASUS", "Laptop", 20000000, 15, true, 4.5));
         products.add(new Product(products.size() + 1, R.drawable.laptop_4,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, false));
+                "ASUS", "Laptop", 20000000, 15, false, 4.25));
         products.add(new Product(products.size() + 1, R.drawable.laptop_5,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, true));
+                "ASUS", "Laptop", 20000000, 15, true, 5));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_5,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true, 5));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_5,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true, 5));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_5,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true, 5));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_5,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true, 5));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_5,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true, 5));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_5,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true, 5));
+        products.add(new Product(products.size() + 1, R.drawable.laptop_5,
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
+                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
+                "ASUS", "Laptop", 20000000, 15, true, 5));
 
         return products;
     }

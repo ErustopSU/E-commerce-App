@@ -1,6 +1,7 @@
 package com.hisu.hisumal.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hisu.hisumal.ContainerActivity;
 import com.hisu.hisumal.R;
+import com.hisu.hisumal.fragment.ProductDetailFragment;
 import com.hisu.hisumal.model.Product;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +53,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             holder.productFreeShipIcon.setImageResource(R.drawable.free_shipping);
 
         holder.parent.setOnClickListener(view -> {
-            Toast.makeText(context, product.getBrand(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, ContainerActivity.class);
+            intent.putExtra(ProductDetailFragment.PRODUCT_DETAIL_KEY, product);
+            context.startActivity(intent);
         });
     }
 

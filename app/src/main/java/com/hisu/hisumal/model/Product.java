@@ -1,5 +1,6 @@
 package com.hisu.hisumal.model;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class Product implements Serializable {
     private int id;
     //Todo: change datatype to String to get img url from internet later
     private int imageResource;
@@ -26,5 +27,10 @@ public class Product {
 
     public String getPriceFormat() {
         return "đ " + new DecimalFormat("#,###").format(getPrice());
+    }
+
+    public String getDiscountFormat() {
+        double discountPrice = getPrice() + (getPrice() * (getDiscount() / 100));
+        return "đ " + new DecimalFormat("#,###").format(discountPrice);
     }
 }

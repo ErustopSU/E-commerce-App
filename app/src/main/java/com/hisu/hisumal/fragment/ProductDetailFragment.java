@@ -1,5 +1,6 @@
 package com.hisu.hisumal.fragment;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +22,9 @@ public class ProductDetailFragment extends Fragment {
     public static final String PRODUCT_DETAIL_KEY = "product";
 
     private ImageView productImg, productShip;
-    private TextView productName, productPrice, productDiscount, productReviewQuantity;
+    private TextView productName, productPrice, productDiscount,
+            productReviewQuantity, txtFreeShipping;
     private RatingBar productRate;
-    private MaterialButton btnBuy;
 
     public ProductDetailFragment(Product product) {
         Bundle bundle = new Bundle();
@@ -52,7 +53,7 @@ public class ProductDetailFragment extends Fragment {
         productDiscount = productDetailView.findViewById(R.id.product_detail_discount);
         productReviewQuantity = productDetailView.findViewById(R.id.product_detail_review);
         productRate = productDetailView.findViewById(R.id.product_detail_rate);
-        btnBuy = productDetailView.findViewById(R.id.product_detail_btn_buy);
+        txtFreeShipping = productDetailView.findViewById(R.id.txt_free_shipping);
     }
 
     private void initFragmentData(Product product) {
@@ -63,7 +64,9 @@ public class ProductDetailFragment extends Fragment {
         productRate.setRating((float) product.getRate());
         productReviewQuantity.setText("(" + new Random().nextInt(30) + " reviews)");
 
-        if(product.isFreeShipping())
-            productShip.setImageResource(R.drawable.free_shipping);
+        if(product.isFreeShipping()) {
+            productShip.setVisibility(ImageView.VISIBLE);
+            txtFreeShipping.setVisibility(TextView.VISIBLE);
+        }
     }
 }

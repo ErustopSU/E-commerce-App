@@ -31,4 +31,7 @@
     <string name="forgot_pwd">Forgot Password?</string>
     <string name="have_account">Already have an account?</string>
     <string name="no_account">Don\'t have any accounts?</string>
+    <string name="money_back">30 days money back guarantee</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="buy_now">Buy Now</string>
 </resources>

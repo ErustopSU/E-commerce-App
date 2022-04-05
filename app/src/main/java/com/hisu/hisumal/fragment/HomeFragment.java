@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
         products.add(new Product(products.size() + 1, R.drawable.laptop_1,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, false, 4.5));
+                "ASUS", "Laptop", 20000000, 15, true, 4.5));
         products.add(new Product(products.size() + 1, R.drawable.laptop_2,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment {
         products.add(new Product(products.size() + 1, R.drawable.laptop_5,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, true, 5));
+                "ASUS", "Laptop", 20000000, 15, false, 5));
         products.add(new Product(products.size() + 1, R.drawable.laptop_5,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
@@ -122,7 +122,7 @@ public class HomeFragment extends Fragment {
         products.add(new Product(products.size() + 1, R.drawable.laptop_5,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, true, 5));
+                "ASUS", "Laptop", 20000000, 15, false, 5));
         products.add(new Product(products.size() + 1, R.drawable.laptop_5,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment {
         products.add(new Product(products.size() + 1, R.drawable.laptop_5,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, true, 5));
+                "ASUS", "Laptop", 20000000, 15, false, 5));
         products.add(new Product(products.size() + 1, R.drawable.laptop_5,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment {
         products.add(new Product(products.size() + 1, R.drawable.laptop_5,
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
                 "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                "ASUS", "Laptop", 20000000, 15, true, 5));
+                "ASUS", "Laptop", 20000000, 15, false, 5));
 
         return products;
     }

@@ -14,9 +14,9 @@
         android:theme="@style/Theme.HisuMal"
         android:usesCleartextTraffic="true">
         <activity android:name=".ContainerActivity"></activity>
-        <!-- <activity android:name=".HomeActivity" /> -->
+         <activity android:name=".HomeActivity" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

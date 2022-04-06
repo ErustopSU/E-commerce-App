@@ -14,16 +14,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Product implements Serializable {
     private int id;
-    //Todo: change datatype to String to get img url from internet later
     private int imageResource;
     private String productName;
     private String description;
     private String brand;
-    private String category;
     private double price;
     private double discount;
     private boolean isFreeShipping;
     private double rate;
+    private int quantityInStock;
+    private ProductSpecification specification;
 
     public String getPriceFormat() {
         return "đ " + new DecimalFormat("#,###").format(getPrice());

@@ -61,7 +61,9 @@ public class HomeActivity extends AppCompatActivity {
 //        });
 
         getSupportFragmentManager().beginTransaction()
-                .add(mFragmentContainer.getId(), new HomeFragment()).commit();
+                .add(mFragmentContainer.getId(), new HomeFragment())
+                .addToBackStack("hehe")
+                .commit();
     }
 
     private void initUI() {
@@ -106,6 +108,12 @@ public class HomeActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        getSupportFragmentManager().popBackStack();
     }
 
     @Override

@@ -6,13 +6,6 @@
     android:orientation="vertical"
     tools:context=".fragment.ProductSpecificationsFragment">
 
-    <View
-        android:layout_marginVertical="2dp"
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
-
     <TableLayout
         android:id="@+id/product_detail_table"
         android:layout_width="match_parent"

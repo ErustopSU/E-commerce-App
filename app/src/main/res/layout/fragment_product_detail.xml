@@ -8,24 +8,41 @@
     tools:context=".fragment.ProductDetailFragment">
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:fadeScrollbars="true"
+        android:scrollbarSize="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/product_detail_img"
+            <RelativeLayout
+                android:id="@+id/image_layout"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/laptop_1"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/product_detail_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/product_detail_slider_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:layout_centerHorizontal="true"
+                    app:ci_drawable="@drawable/indicator_background"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -47,10 +64,10 @@
                 android:textColor="@color/black"
                 android:textSize="22dp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/product_detail_img"
+                app:layout_constraintEnd_toEndOf="@+id/image_layout"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/product_detail_img" />
+                app:layout_constraintTop_toBottomOf="@+id/image_layout" />
 
             <TextView
                 android:id="@+id/product_detail_price"
@@ -104,7 +121,6 @@
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toTopOf="@+id/textView7"
                 app:layout_constraintVertical_bias="0.0" />
-
 
             <RatingBar
                 android:id="@+id/product_detail_rate"
@@ -195,7 +211,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Specifications:"
-                android:textColor="@color/darkBlue"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/product_detail_desc_container"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"

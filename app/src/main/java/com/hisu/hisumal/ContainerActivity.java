@@ -11,17 +11,21 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.hisu.hisumal.fragment.ProductDetailFragment;
 import com.hisu.hisumal.model.Product;
 
 public class ContainerActivity extends AppCompatActivity {
 
     private FrameLayout mainContainer;
+    private AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
+
+        appBarLayout = findViewById(R.id.app_bar);
 
         Toolbar mToolbar = findViewById(R.id.my_toolbar_2);
         setSupportActionBar(mToolbar);
@@ -39,6 +43,16 @@ public class ContainerActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .add(mainContainer.getId(), new ProductDetailFragment(product)).commit();
+    }
+
+    public void showBackground() {
+        appBarLayout.setBackgroundColor(Color.WHITE);
+        appBarLayout.setElevation(40f);
+    }
+
+    public void hideBackground() {
+        appBarLayout.setBackground(null);
+        appBarLayout.setElevation(0);
     }
 
     @Override

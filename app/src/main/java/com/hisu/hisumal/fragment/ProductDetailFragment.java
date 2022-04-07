@@ -7,24 +7,41 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.hisu.hisumal.ContainerActivity;
 import com.hisu.hisumal.R;
+import com.hisu.hisumal.adapter.SliderAdapter;
 import com.hisu.hisumal.model.Product;
+import com.hisu.hisumal.model.SliderItem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import me.relex.circleindicator.CircleIndicator3;
 
 public class ProductDetailFragment extends Fragment {
 
     public static final String PRODUCT_DETAIL_KEY = "product";
 
-    private ImageView productImg, productShip;
+    private ContainerActivity activity;
+
+    private ViewPager2 productImg;
+    private CircleIndicator3 productIndicator;
+    private List<SliderItem> sliderItems;
+
+    private ImageView productShip;
     private TextView productName, productPrice, productDiscount,
             productReviewQuantity, txtFreeShipping, productQuantityInStock;
+
     private RatingBar productRate;
     private FrameLayout productSpecificationsContainer;
+    private ScrollView scrollView;
 
     public ProductDetailFragment(Product product) {
         Bundle bundle = new Bundle();
@@ -42,14 +59,17 @@ public class ProductDetailFragment extends Fragment {
         initFragmentUI(productDetailView);
         initFragmentData(product);
 
-        getChildFragmentManager().beginTransaction()
-                .add(productSpecificationsContainer.getId(), new ProductSpecificationsFragment(product)).commit();
+        toggleHideToolbarOnScroll();
 
         return productDetailView;
     }
 
     private void initFragmentUI(View productDetailView) {
+        activity = (ContainerActivity) getActivity();
+
         productImg = productDetailView.findViewById(R.id.product_detail_img);
+        productIndicator = productDetailView.findViewById(R.id.product_detail_slider_indicator);
+
         productShip = productDetailView.findViewById(R.id.product_detail_ship);
         productName = productDetailView.findViewById(R.id.product_detail_name);
         productPrice = productDetailView.findViewById(R.id.product_detail_price);
@@ -59,11 +79,29 @@ public class ProductDetailFragment extends Fragment {
         productQuantityInStock = productDetailView.findViewById(R.id.product_detail_quantity_in_stock);
         txtFreeShipping = productDetailView.findViewById(R.id.txt_free_shipping);
 
+        scrollView = productDetailView.findViewById(R.id.scroll_view);
+
         productSpecificationsContainer = productDetailView.findViewById(R.id.product_detail_desc_container);
     }
 
+    private List<SliderItem> initSliderItem() {
+        List<SliderItem> items = new ArrayList<>();
+
+        items.add(new SliderItem(R.drawable.laptop_1_slide_1));
+        items.add(new SliderItem(R.drawable.laptop_1_slide_2));
+        items.add(new SliderItem(R.drawable.laptop_1_slide_3));
+        items.add(new SliderItem(R.drawable.laptop_1_slide_4));
+
+        return items;
+    }
+
     private void initFragmentData(Product product) {
-        productImg.setImageResource(product.getImageResource());
+
+        sliderItems = initSliderItem();
+        sliderItems.add(0, new SliderItem(product.getImageResource()));
+        productImg.setAdapter(new SliderAdapter(sliderItems));
+        productIndicator.setViewPager(productImg);
+
         productName.setText(product.getProductName());
         productPrice.setText(product.getPriceFormat());
         productDiscount.setText(product.getDiscountFormat());
@@ -71,9 +109,24 @@ public class ProductDetailFragment extends Fragment {
         productQuantityInStock.append(" " + product.getQuantityInStock());
         productReviewQuantity.setText("(" + new Random().nextInt(30) + " reviews)");
 
-        if(product.isFreeShipping()) {
+        if (product.isFreeShipping()) {
             productShip.setVisibility(ImageView.VISIBLE);
             txtFreeShipping.setVisibility(TextView.VISIBLE);
         }
+
+        getChildFragmentManager()
+                .beginTransaction()
+                .add(productSpecificationsContainer.getId(),
+                        new ProductSpecificationsFragment(product))
+                .commit();
+    }
+
+    private void toggleHideToolbarOnScroll() {
+        scrollView.setOnScrollChangeListener((view, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY >= 150) //if user scroll for 150 px or whatever -> set elevation
+                activity.showBackground();
+            else
+                activity.hideBackground();
+        });
     }
 }

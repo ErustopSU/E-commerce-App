@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.hisu.hisumal.R;
@@ -149,7 +147,7 @@ public class HomeFragment extends Fragment {
 
         items.add(new SliderItem(R.drawable.slider_1));
         items.add(new SliderItem(R.drawable.slider_2));
-        items.add(new SliderItem(R.drawable.slider_7));
+        items.add(new SliderItem(R.drawable.slider_3));
 
         return items;
     }

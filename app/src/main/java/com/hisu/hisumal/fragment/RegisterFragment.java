@@ -62,7 +62,7 @@ public class RegisterFragment extends Fragment {
 
     private void initUI(View view) {
         txtHaveAccount = view.findViewById(R.id.txt_have_account);
-        txtHaveAccount.append(Html.fromHtml(" <u>Login now!</u>"));
+        txtHaveAccount.append(" " + Html.fromHtml("<u>Login now!</u>"));
 
         mEdtEmail = view.findViewById(R.id.edt_regis_email);
         mEdtUserName = view.findViewById(R.id.edt_regis_username);

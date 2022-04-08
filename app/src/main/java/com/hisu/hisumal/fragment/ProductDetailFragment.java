@@ -4,15 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hisu.hisumal.ContainerActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.SliderAdapter;
@@ -43,6 +49,18 @@ public class ProductDetailFragment extends Fragment {
     private FrameLayout productSpecificationsContainer;
     private ScrollView scrollView;
 
+    private LinearLayout btnAddToCart;
+    private TextView btnBuyNow;
+
+    private View bottomSheetLayout;
+    private ImageView orderProductImg;
+    private TextView orderProductName, orderProductDiscount,
+            orderProductPrice, orderProductInStock;
+    private ImageButton btnQuantityMinus, btnQuantityPlus;
+    private EditText edtQuantity;
+    private BottomSheetDialog orderBottomSheetDialog;
+    private Button btnOder;
+
     public ProductDetailFragment(Product product) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(PRODUCT_DETAIL_KEY, product);
@@ -59,7 +77,12 @@ public class ProductDetailFragment extends Fragment {
         initFragmentUI(productDetailView);
         initFragmentData(product);
 
-        toggleHideToolbarOnScroll();
+        initBottomSheetUI();
+        addActionForBottomSheetOrderButtons();
+        setBottomSheetData(product);
+
+        toggleDisplayToolbarOnScroll();
+        toggleDisplayCheckOutBottomSheetLayout();
 
         return productDetailView;
     }
@@ -80,8 +103,10 @@ public class ProductDetailFragment extends Fragment {
         txtFreeShipping = productDetailView.findViewById(R.id.txt_free_shipping);
 
         scrollView = productDetailView.findViewById(R.id.scroll_view);
-
         productSpecificationsContainer = productDetailView.findViewById(R.id.product_detail_desc_container);
+
+        btnAddToCart = productDetailView.findViewById(R.id.btn_add_to_cart);
+        btnBuyNow = productDetailView.findViewById(R.id.btn_buy_now);
     }
 
     private List<SliderItem> initSliderItem() {
@@ -96,7 +121,6 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void initFragmentData(Product product) {
-
         sliderItems = initSliderItem();
         sliderItems.add(0, new SliderItem(product.getImageResource()));
         productImg.setAdapter(new SliderAdapter(sliderItems));
@@ -121,12 +145,81 @@ public class ProductDetailFragment extends Fragment {
                 .commit();
     }
 
-    private void toggleHideToolbarOnScroll() {
+    private void initBottomSheetUI() {
+        bottomSheetLayout = getLayoutInflater()
+                .inflate(R.layout.layout_checkout_bottom_sheet, null);
+
+        orderBottomSheetDialog = new BottomSheetDialog(getContext());
+        orderBottomSheetDialog.setContentView(bottomSheetLayout);
+
+        orderProductImg = bottomSheetLayout.findViewById(R.id.order_product_img);
+        orderProductName = bottomSheetLayout.findViewById(R.id.order_product_name);
+        orderProductDiscount = bottomSheetLayout.findViewById(R.id.order_product_discount);
+        orderProductPrice = bottomSheetLayout.findViewById(R.id.order_product_price);
+        orderProductInStock = bottomSheetLayout.findViewById(R.id.order_product_in_stock);
+
+        btnQuantityMinus = bottomSheetLayout.findViewById(R.id.btn_order_minus);
+        btnQuantityMinus.setClickable(false);
+        btnQuantityPlus = bottomSheetLayout.findViewById(R.id.btn_order_plus);
+        edtQuantity = bottomSheetLayout.findViewById(R.id.edt_order_quantity);
+
+        btnOder = bottomSheetLayout.findViewById(R.id.btn_order);
+    }
+
+    private void addActionForBottomSheetOrderButtons() {
+        btnQuantityMinus.setOnClickListener(view -> {
+            int currentQuantity = getCurrentOrderQuantity();
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                edtQuantity.setText(String.valueOf(currentQuantity));
+            } else if (currentQuantity == 1) {
+                btnQuantityMinus.setClickable(false);
+                return;
+            }
+        });
+
+        btnQuantityPlus.setOnClickListener(view -> {
+            if (!btnQuantityMinus.isClickable())
+                btnQuantityMinus.setClickable(true);
+            edtQuantity.setText(String.valueOf(getCurrentOrderQuantity() + 1));
+        });
+    }
+
+    private void setBottomSheetData(Product product) {
+        orderProductImg.setImageResource(product.getImageResource());
+        orderProductName.setText(product.getProductName());
+        orderProductPrice.setText(product.getPriceFormat());
+        orderProductDiscount.setText(product.getDiscountFormat());
+        orderProductInStock.append(" " + product.getQuantityInStock());
+    }
+
+    private int getCurrentOrderQuantity() {
+        return Integer.parseInt(edtQuantity.getText().toString());
+    }
+
+    private void toggleDisplayToolbarOnScroll() {
         scrollView.setOnScrollChangeListener((view, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (scrollY >= 150) //if user scroll for 150 px or whatever -> set elevation
                 activity.showBackground();
             else
                 activity.hideBackground();
         });
+    }
+
+    private void toggleDisplayCheckOutBottomSheetLayout() {
+        btnBuyNow.setOnClickListener(view -> {
+            orderBottomSheetDialog.show();
+            changeButtonState(R.string.buy_now, R.color.secondaryColor);
+        });
+
+        btnAddToCart.setOnClickListener(view -> {
+            orderBottomSheetDialog.show();
+            changeButtonState(R.string.add_to_cart, R.color.teal_500);
+        });
+    }
+
+    private void changeButtonState(int buttonText, int color) {
+        btnOder.setText(getResources().getString(buttonText));
+        btnOder.setBackgroundColor(ContextCompat.getColor(getContext(), color));
     }
 }

@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".fragment.ProductDetailFragment">
 
+    //Main content
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
@@ -237,6 +238,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    //Bottom Buttons
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

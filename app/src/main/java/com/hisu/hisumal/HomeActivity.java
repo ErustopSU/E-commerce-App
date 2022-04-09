@@ -1,13 +1,16 @@
 package com.hisu.hisumal;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -113,13 +116,24 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        getSupportFragmentManager().popBackStack();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.toolbar_cart) {
+            Intent intent = new Intent(this, ContainerActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt(ContainerActivity.CONTAINER_TOOLBAR_MENU_MODE, 0);
+            intent.putExtra(ContainerActivity.CONTAINER_KEY, bundle);
+            startActivity(intent);
+        }
         return true;
     }
 

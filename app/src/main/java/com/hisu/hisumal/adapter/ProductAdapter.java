@@ -2,12 +2,12 @@ package com.hisu.hisumal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -54,7 +54,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         holder.parent.setOnClickListener(view -> {
             Intent intent = new Intent(context, ContainerActivity.class);
-            intent.putExtra(ProductDetailFragment.PRODUCT_DETAIL_KEY, product);
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(ProductDetailFragment.PRODUCT_DETAIL_KEY, product);
+            bundle.putInt(ContainerActivity.CONTAINER_TOOLBAR_MENU_MODE, 1);
+            intent.putExtra(ContainerActivity.CONTAINER_KEY, bundle);
+
             context.startActivity(intent);
         });
     }

@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,7 @@ public class ContainerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
 
-        appBarLayout = findViewById(R.id.app_bar);
+        appBarLayout = findViewById(R.id.app_bar_2);
 
         Toolbar mToolbar = findViewById(R.id.my_toolbar_2);
         setSupportActionBar(mToolbar);
@@ -62,6 +63,15 @@ public class ContainerActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(mainContainer.getId(), fragment)
                 .commit();
+    }
+
+    public void setToolBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+    }
+
+    public void hideToolBarTitle() {
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     public void showBackground() {

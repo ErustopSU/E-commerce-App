@@ -89,6 +89,7 @@ public class ProductDetailFragment extends Fragment {
 
     private void initFragmentUI(View productDetailView) {
         activity = (ContainerActivity) getActivity();
+        activity.hideToolBarTitle();
 
         productImg = productDetailView.findViewById(R.id.product_detail_img);
         productIndicator = productDetailView.findViewById(R.id.product_detail_slider_indicator);

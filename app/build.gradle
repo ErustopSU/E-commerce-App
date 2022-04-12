@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
@@ -49,6 +50,10 @@ dependencies {
     //Java extension
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    //Room
+    implementation("androidx.room:room-runtime:2.4.2")
+    annotationProcessor("androidx.room:room-compiler:2.4.2")
 
     //Android libs
     implementation 'de.hdodenhof:circleimageview:3.1.0'

@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product implements Serializable {
+
     private int id;
     private int imageResource;
     private String productName;

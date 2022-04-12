@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +42,7 @@ public class ContainerActivity extends AppCompatActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+        productDetailToolbarBackIcon();
 
         mainContainer = findViewById(R.id.product_container);
 
@@ -65,13 +64,23 @@ public class ContainerActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void hideToolBarTitle() {
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    public void cartToolbarBackground() {
+        appBarLayout.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_white);
+        setToolBarTitle("My Cart");
+    }
+
     public void setToolBarTitle(String title) {
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
     }
 
-    public void hideToolBarTitle() {
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    public void productDetailToolbarBackIcon() {
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
     }
 
     public void showBackground() {

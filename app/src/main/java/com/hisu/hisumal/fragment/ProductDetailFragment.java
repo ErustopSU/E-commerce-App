@@ -46,6 +46,7 @@ public class ProductDetailFragment extends Fragment {
             productReviewQuantity, txtFreeShipping, productQuantityInStock;
 
     private RatingBar productRate;
+    private TextView productDesc;
     private FrameLayout productSpecificationsContainer;
     private ScrollView scrollView;
 
@@ -90,6 +91,8 @@ public class ProductDetailFragment extends Fragment {
     private void initFragmentUI(View productDetailView) {
         activity = (ContainerActivity) getActivity();
         activity.hideToolBarTitle();
+        activity.hideBackground();
+        activity.productDetailToolbarBackIcon();
 
         productImg = productDetailView.findViewById(R.id.product_detail_img);
         productIndicator = productDetailView.findViewById(R.id.product_detail_slider_indicator);
@@ -103,6 +106,7 @@ public class ProductDetailFragment extends Fragment {
         productQuantityInStock = productDetailView.findViewById(R.id.product_detail_quantity_in_stock);
         txtFreeShipping = productDetailView.findViewById(R.id.txt_free_shipping);
 
+        productDesc = productDetailView.findViewById(R.id.product_detail_desc);
         scrollView = productDetailView.findViewById(R.id.scroll_view);
         productSpecificationsContainer = productDetailView.findViewById(R.id.product_detail_desc_container);
 
@@ -132,6 +136,7 @@ public class ProductDetailFragment extends Fragment {
         productDiscount.setText(product.getDiscountFormat());
         productRate.setRating((float) product.getRate());
         productQuantityInStock.append(" " + product.getQuantityInStock());
+        productDesc.setText(product.getDescription());
         productReviewQuantity.setText("(" + new Random().nextInt(30) + " reviews)");
 
         if (product.isFreeShipping()) {

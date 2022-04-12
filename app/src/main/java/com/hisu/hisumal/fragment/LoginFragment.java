@@ -91,7 +91,7 @@ public class LoginFragment extends Fragment {
     private void addActionForBtnLogin() {
         btnLogin.setOnClickListener(view1 -> {
 
-            //Todo: Uncomment this line to check for log in logic, to ez to test, i comment this line :v
+            //Todo: Uncomment this line to check for log in logic, to ez to ICheckBoxChangedListener, i comment this line :v
 //            if (!isValidAccount(mEdtUserName.getText().toString().trim(), mEdtPwd.getText().toString().trim()))
 //                return;
 

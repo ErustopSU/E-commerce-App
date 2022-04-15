@@ -5,7 +5,10 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.entity.User;
+
+import java.util.List;
 
 @Dao
 public interface UserDAO {
@@ -17,4 +20,10 @@ public interface UserDAO {
 
     @Update
     void updateUserInfo(User user);
+
+    @Query("select * from products")
+    List<Product> getAllProducts();
+
+    @Insert
+    long addProduct(Product product);
 }

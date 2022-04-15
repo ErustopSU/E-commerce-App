@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hisu.hisumal.R;
-import com.hisu.hisumal.model.Product;
+import com.hisu.hisumal.entity.Product;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +40,7 @@ public class ProductTopSellAdapter extends RecyclerView.Adapter<ProductTopSellAd
     @Override
     public void onBindViewHolder(@NonNull @NotNull ProductTopSellViewHolder holder, int position) {
         Product product = productList.get(position);
-        holder.productImg.setImageResource(product.getImageResource());
+        holder.productImg.setImageResource(product.getProductImages().get(0));
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(product.getPriceFormat());
         holder.productRate.setText(String.valueOf(product.getRate()));

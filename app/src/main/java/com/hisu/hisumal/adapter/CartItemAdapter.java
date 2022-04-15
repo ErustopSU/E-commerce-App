@@ -15,8 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hisu.hisumal.R;
+import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.fragment.ShoppingCartFragment;
-import com.hisu.hisumal.model.Product;
 import com.hisu.hisumal.myInterface.ICheckBoxChangedListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -53,7 +53,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     public void onBindViewHolder(@NonNull @NotNull CartItemViewHolder holder, int position) {
 
         Product product = productList.get(position);
-        holder.itemImg.setImageResource(product.getImageResource());
+        holder.itemImg.setImageResource(product.getProductImages().get(0));
         holder.itemName.setText(product.getProductName());
         holder.itemDiscount.setText(product.getDiscountFormat());
         holder.itemPrice.setText(product.getPriceFormat());

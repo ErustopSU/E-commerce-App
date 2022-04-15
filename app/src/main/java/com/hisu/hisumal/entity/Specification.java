@@ -1,4 +1,4 @@
-package com.hisu.hisumal.model;
+package com.hisu.hisumal.entity;
 
 import java.io.Serializable;
 
@@ -6,11 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
-public class ProductSpecification implements Serializable {
-    private int productID;
+@Setter
+@Getter
+public class Specification implements Serializable {
     private String cpu;
     private String os;
     private String ram;

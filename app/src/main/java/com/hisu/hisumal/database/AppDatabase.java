@@ -5,12 +5,15 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.hisu.hisumal.dao.UserDAO;
+import com.hisu.hisumal.entity.IntegerTypeConverter;
 import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.entity.User;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class, Product.class}, version = 1)
+@TypeConverters(IntegerTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "HMal_DB";

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.entity.Product;
+import com.hisu.hisumal.util.ImageConverterHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +41,9 @@ public class ProductTopSellAdapter extends RecyclerView.Adapter<ProductTopSellAd
     @Override
     public void onBindViewHolder(@NonNull @NotNull ProductTopSellViewHolder holder, int position) {
         Product product = productList.get(position);
-        holder.productImg.setImageResource(product.getProductImages().get(0));
+        holder.productImg.setImageResource(
+                ImageConverterHelper.getResourceIdFromString(context,
+                        product.getProductImages().get(0)));
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(product.getPriceFormat());
         holder.productRate.setText(String.valueOf(product.getRate()));

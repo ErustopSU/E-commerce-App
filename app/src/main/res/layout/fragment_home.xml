@@ -23,8 +23,8 @@
                 android:id="@+id/banner_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp" />
+                android:layout_marginTop="4dp"
+                android:paddingHorizontal="30dp" />
 
             <me.relex.circleindicator.CircleIndicator3
                 android:id="@+id/banner_slider_indicator"

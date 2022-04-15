@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.hisu.hisumal.R;
@@ -20,6 +23,8 @@ import com.hisu.hisumal.adapter.SliderAdapter;
 import com.hisu.hisumal.database.AppDatabase;
 import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.model.SliderItem;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,12 +92,9 @@ public class HomeFragment extends Fragment {
         productAdapter = new ProductAdapter(getActivity(), productList);
     }
 
-    //Todo: change method to fetch data from database or api
     private List<Product> initProductData() {
         List<Product> products = new ArrayList<>();
-
         products = AppDatabase.getInstance(getContext()).userDAO().getAllProducts();
-
         return products;
     }
 
@@ -108,7 +110,21 @@ public class HomeFragment extends Fragment {
 
     private void initSliderViewPager() {
         SliderAdapter sliderAdapter = new SliderAdapter(sliderItems);
+
         bannerViewPager.setAdapter(sliderAdapter);
+        bannerViewPager.setClipToPadding(false);
+        bannerViewPager.setClipChildren(false);
+        bannerViewPager.setOffscreenPageLimit(3);
+
+        CompositePageTransformer transformer = new CompositePageTransformer();
+        transformer.addTransformer(new MarginPageTransformer(40));
+        transformer.addTransformer((page, position) -> {
+            float r = 1 - Math.abs(position);
+            page.setScaleY(0.85f + r * 0.15f);
+        });
+
+        bannerViewPager.setPageTransformer(transformer);
+
         circleIndicator.setViewPager(bannerViewPager);
     }
 

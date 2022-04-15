@@ -25,7 +25,7 @@ public class Product implements Serializable {
     @Embedded(prefix = "product_spec_")
     private Specification specification;
 
-    private List<Integer> productImages;
+    private List<String> productImages;
 
     public Product() {
     }
@@ -33,7 +33,7 @@ public class Product implements Serializable {
     public Product(String productName, String description, String brand,
                    double price,
                    double discount, boolean isFreeShipping, double rate, int quantityInStock,
-                   Specification specification, List<Integer> productImages) {
+                   Specification specification, List<String> productImages) {
         this.productName = productName;
         this.description = description;
         this.brand = brand;
@@ -126,11 +126,11 @@ public class Product implements Serializable {
         this.specification = specification;
     }
 
-    public List<Integer> getProductImages() {
+    public List<String> getProductImages() {
         return productImages;
     }
 
-    public void setProductImages(List<Integer> productImages) {
+    public void setProductImages(List<String> productImages) {
         this.productImages = productImages;
     }
 

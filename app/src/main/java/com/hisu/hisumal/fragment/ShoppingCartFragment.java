@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hisu.hisumal.ContainerActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.CartItemAdapter;
-import com.hisu.hisumal.model.Product;
+import com.hisu.hisumal.database.AppDatabase;
+import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.myInterface.ICheckBoxChangedListener;
 
 import java.text.DecimalFormat;
@@ -45,18 +46,7 @@ public class ShoppingCartFragment extends Fragment implements ICheckBoxChangedLi
 
         CartItemAdapter adapter = new CartItemAdapter(
                 getContext(),
-                List.of(new Product(1, R.drawable.laptop_1,
-                                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
-                                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                                "ASUS", 20000000, 15, true, 4.5, 2, null),
-                        new Product(1, R.drawable.laptop_1,
-                                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
-                                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                                "ASUS", 20000000, 15, true, 4.5, 2, null),
-                        new Product(1, R.drawable.laptop_1,
-                                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W",
-                                "Laptop Asus Gaming Rog Strix G15 G513IH HN015W bla bla desc",
-                                "ASUS", 20000000, 15, true, 4.5, 2, null))
+                AppDatabase.getInstance(getContext()).userDAO().getAllProducts()
                 , this);
 
         cartRecyclerView.setAdapter(adapter);

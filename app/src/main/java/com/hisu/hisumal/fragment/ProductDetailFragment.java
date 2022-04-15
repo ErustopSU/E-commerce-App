@@ -1,6 +1,7 @@
 package com.hisu.hisumal.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hisu.hisumal.ContainerActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.SliderAdapter;
-import com.hisu.hisumal.model.Product;
+import com.hisu.hisumal.database.AppDatabase;
+import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.model.SliderItem;
 
 import java.util.ArrayList;
@@ -115,19 +117,27 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private List<SliderItem> initSliderItem() {
+
+        List<com.hisu.hisumal.entity.Product> products
+                = AppDatabase.getInstance(getContext()).userDAO().getAllProducts();
+
+        Log.e("TEST SIZE", products.size()+"!");
+
         List<SliderItem> items = new ArrayList<>();
 
-        items.add(new SliderItem(R.drawable.laptop_1_slide_1));
-        items.add(new SliderItem(R.drawable.laptop_1_slide_2));
-        items.add(new SliderItem(R.drawable.laptop_1_slide_3));
-        items.add(new SliderItem(R.drawable.laptop_1_slide_4));
+        com.hisu.hisumal.entity.Product product = products.get(0);
+
+        items.add(new SliderItem(product.getProductImages().get(1)));
+        items.add(new SliderItem(product.getProductImages().get(2)));
+        items.add(new SliderItem(product.getProductImages().get(3)));
+        items.add(new SliderItem(product.getProductImages().get(4)));
 
         return items;
     }
 
     private void initFragmentData(Product product) {
         sliderItems = initSliderItem();
-        sliderItems.add(0, new SliderItem(product.getImageResource()));
+        sliderItems.add(0, new SliderItem(product.getProductImages().get(0)));
         productImg.setAdapter(new SliderAdapter(sliderItems));
         productIndicator.setViewPager(productImg);
 
@@ -192,7 +202,7 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void setBottomSheetData(Product product) {
-        orderProductImg.setImageResource(product.getImageResource());
+        orderProductImg.setImageResource(product.getProductImages().get(0));
         orderProductName.setText(product.getProductName());
         orderProductPrice.setText(product.getPriceFormat());
         orderProductDiscount.setText(product.getDiscountFormat());

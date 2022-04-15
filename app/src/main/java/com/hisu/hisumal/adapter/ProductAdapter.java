@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hisu.hisumal.ContainerActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.fragment.ProductDetailFragment;
-import com.hisu.hisumal.model.Product;
+import com.hisu.hisumal.entity.Product;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +45,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
 
-        holder.productImg.setImageResource(product.getImageResource());
+        holder.productImg.setImageResource(product.getProductImages().get(0));
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(product.getPriceFormat());
 

@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.appbar.AppBarLayout;
 import com.hisu.hisumal.fragment.ProductDetailFragment;
 import com.hisu.hisumal.fragment.ShoppingCartFragment;
-import com.hisu.hisumal.model.Product;
+import com.hisu.hisumal.entity.Product;
 
 public class ContainerActivity extends AppCompatActivity {
 

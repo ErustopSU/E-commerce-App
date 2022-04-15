@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hisu.hisumal.R;
-import com.hisu.hisumal.model.Product;
+import com.hisu.hisumal.entity.Product;
 
 public class ProductSpecificationsFragment extends Fragment {
 

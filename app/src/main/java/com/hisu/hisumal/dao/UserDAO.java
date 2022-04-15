@@ -25,5 +25,5 @@ public interface UserDAO {
     List<Product> getAllProducts();
 
     @Insert
-    long addProduct(Product product);
+    void addProduct(Product... product);
 }

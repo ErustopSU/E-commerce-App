@@ -18,6 +18,7 @@ import com.hisu.hisumal.R;
 import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.fragment.ShoppingCartFragment;
 import com.hisu.hisumal.myInterface.ICheckBoxChangedListener;
+import com.hisu.hisumal.util.ImageConverterHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -53,7 +54,10 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     public void onBindViewHolder(@NonNull @NotNull CartItemViewHolder holder, int position) {
 
         Product product = productList.get(position);
-        holder.itemImg.setImageResource(product.getProductImages().get(0));
+        holder.itemImg.setImageResource(
+                ImageConverterHelper.getResourceIdFromString(context,
+                        product.getProductImages().get(0))
+        );
         holder.itemName.setText(product.getProductName());
         holder.itemDiscount.setText(product.getDiscountFormat());
         holder.itemPrice.setText(product.getPriceFormat());

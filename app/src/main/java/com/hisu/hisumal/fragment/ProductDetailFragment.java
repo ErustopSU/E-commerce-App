@@ -26,6 +26,7 @@ import com.hisu.hisumal.adapter.SliderAdapter;
 import com.hisu.hisumal.database.AppDatabase;
 import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.model.SliderItem;
+import com.hisu.hisumal.util.ImageConverterHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,23 +122,28 @@ public class ProductDetailFragment extends Fragment {
         List<com.hisu.hisumal.entity.Product> products
                 = AppDatabase.getInstance(getContext()).userDAO().getAllProducts();
 
-        Log.e("TEST SIZE", products.size()+"!");
-
         List<SliderItem> items = new ArrayList<>();
 
         com.hisu.hisumal.entity.Product product = products.get(0);
 
-        items.add(new SliderItem(product.getProductImages().get(1)));
-        items.add(new SliderItem(product.getProductImages().get(2)));
-        items.add(new SliderItem(product.getProductImages().get(3)));
-        items.add(new SliderItem(product.getProductImages().get(4)));
+        items.add(new SliderItem(ImageConverterHelper.getResourceIdFromString(getContext(),
+                product.getProductImages().get(1))));
+        items.add(new SliderItem(ImageConverterHelper.getResourceIdFromString(getContext(),
+                product.getProductImages().get(2))));
+        items.add(new SliderItem(ImageConverterHelper.getResourceIdFromString(getContext(),
+                product.getProductImages().get(3))));
+        items.add(new SliderItem(ImageConverterHelper.getResourceIdFromString(getContext(),
+                product.getProductImages().get(4))));
 
         return items;
     }
 
     private void initFragmentData(Product product) {
         sliderItems = initSliderItem();
-        sliderItems.add(0, new SliderItem(product.getProductImages().get(0)));
+        sliderItems.add(0, new SliderItem(
+                ImageConverterHelper.getResourceIdFromString(getContext(),
+                        product.getProductImages().get(0))
+        ));
         productImg.setAdapter(new SliderAdapter(sliderItems));
         productIndicator.setViewPager(productImg);
 
@@ -202,7 +208,10 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void setBottomSheetData(Product product) {
-        orderProductImg.setImageResource(product.getProductImages().get(0));
+        orderProductImg.setImageResource(
+                ImageConverterHelper.getResourceIdFromString(getContext(),
+                        product.getProductImages().get(0))
+        );
         orderProductName.setText(product.getProductName());
         orderProductPrice.setText(product.getPriceFormat());
         orderProductDiscount.setText(product.getDiscountFormat());

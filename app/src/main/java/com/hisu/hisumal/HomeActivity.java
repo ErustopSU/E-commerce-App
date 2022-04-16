@@ -3,6 +3,7 @@ package com.hisu.hisumal;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +22,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.hisu.hisumal.entity.Product;
+import com.hisu.hisumal.entity.Specification;
 import com.hisu.hisumal.fragment.HomeFragment;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,7 +50,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
 
         initUI();
@@ -65,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .add(mFragmentContainer.getId(), new HomeFragment())
-                .addToBackStack("hehe")
+                .addToBackStack(HomeFragment.class.getName())
                 .commit();
     }
 

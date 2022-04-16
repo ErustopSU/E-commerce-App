@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
 
-    private List<SliderItem> sliderItems;
+    private final List<SliderItem> sliderItems;
 
     public SliderAdapter(List<SliderItem> sliderItems) {
         this.sliderItems = sliderItems;
@@ -46,7 +46,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
     public class SliderViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView sliderImg;
+        private final ImageView sliderImg;
 
         public SliderViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

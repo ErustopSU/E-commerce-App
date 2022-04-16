@@ -21,8 +21,8 @@ import java.util.List;
 
 public class ProductTopSellAdapter extends RecyclerView.Adapter<ProductTopSellAdapter.ProductTopSellViewHolder> {
 
-    private Context context;
-    private List<Product> productList;
+    private final Context context;
+    private final List<Product> productList;
 
     public ProductTopSellAdapter(Context context, List<Product> productList) {
         this.context = context;
@@ -55,11 +55,11 @@ public class ProductTopSellAdapter extends RecyclerView.Adapter<ProductTopSellAd
         return productList.size();
     }
 
-    public class ProductTopSellViewHolder extends RecyclerView.ViewHolder {
+    public static class ProductTopSellViewHolder extends RecyclerView.ViewHolder {
 
         private CardView parent;
-        private ImageView productImg;
-        private TextView productName, productPrice, productRate;
+        private final ImageView productImg;
+        private final TextView productName, productPrice, productRate;
 
         public ProductTopSellViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

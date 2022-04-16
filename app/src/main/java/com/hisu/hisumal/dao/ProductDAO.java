@@ -6,18 +6,17 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.hisu.hisumal.entity.Product;
-import com.hisu.hisumal.entity.User;
 
 import java.util.List;
 
 @Dao
-public interface UserDAO {
-    @Query("select * from users where userID = :userID")
-    User getUser(int userID);
+public interface ProductDAO {
+    @Query("select * from products")
+    List<Product> getAllProducts();
 
     @Insert
-    long addUser(User user);
+    void addProduct(Product... product);
 
     @Update
-    void updateUserInfo(User user);
+    void update(Product... product);
 }

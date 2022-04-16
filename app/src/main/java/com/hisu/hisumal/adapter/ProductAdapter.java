@@ -25,8 +25,8 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private Context context;
-    private List<Product> productList;
+    private final Context context;
+    private final List<Product> productList;
 
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
@@ -75,9 +75,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
-        private CardView parent;
-        private ImageView productImg, productFreeShipIcon;
-        private TextView productName, productPrice;
+        private final CardView parent;
+        private final ImageView productImg, productFreeShipIcon;
+        private final TextView productName, productPrice;
 
         public ProductViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

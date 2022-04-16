@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -69,7 +70,7 @@ public class ContainerActivity extends AppCompatActivity {
     }
 
     public void cartToolbarBackground() {
-        appBarLayout.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        appBarLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.secondaryColor));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_white);
         setToolBarTitle("My Cart");
     }

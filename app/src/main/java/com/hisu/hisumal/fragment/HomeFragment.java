@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
 
     private List<Product> initProductData() {
         List<Product> products = new ArrayList<>();
-        products = AppDatabase.getInstance(getContext()).userDAO().getAllProducts();
+        products = AppDatabase.getInstance(getContext()).productDAO().getAllProducts();
         return products;
     }
 

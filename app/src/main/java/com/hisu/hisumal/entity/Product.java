@@ -2,6 +2,7 @@ package com.hisu.hisumal.entity;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
+    @Ignore
     public Product(String productName, String description, String brand,
                    double price,
                    double discount, boolean isFreeShipping, double rate, int quantityInStock,

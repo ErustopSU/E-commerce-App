@@ -1,13 +1,14 @@
 package com.hisu.hisumal.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
 @Entity(tableName = "users")
 public class User implements Serializable {
-    
+
     @PrimaryKey(autoGenerate = true)
     private int userID;
     private String fullName;
@@ -16,6 +17,9 @@ public class User implements Serializable {
     private String password;
     private String address;
 
+    public User() { }
+
+    @Ignore
     public User(String fullName, String email, String userName, String password, String address) {
         this.fullName = fullName;
         this.email = email;

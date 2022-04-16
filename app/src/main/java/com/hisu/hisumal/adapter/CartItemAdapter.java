@@ -27,11 +27,11 @@ import java.util.List;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
 
-    private Context context;
-    private List<Product> productList;
-    private List<CartItemViewHolder> cartItemViewHolders;
-    private ICheckBoxChangedListener checkBoxChangedListener;
-    private ShoppingCartFragment cartFragment;
+    private final Context context;
+    private final List<Product> productList;
+    private final List<CartItemViewHolder> cartItemViewHolders;
+    private final ICheckBoxChangedListener checkBoxChangedListener;
+    private final ShoppingCartFragment cartFragment;
 
     public CartItemAdapter(Context context, List<Product> productList, ICheckBoxChangedListener checkBoxChangedListener) {
         this.context = context;
@@ -66,10 +66,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         cartItemViewHolders.add(holder);
 
         holder.itemCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (!isCheckOutAll())
-                cartFragment.toggleCheckOutAllCheckBox(false);
-            else
-                cartFragment.toggleCheckOutAllCheckBox(true);
+            cartFragment.toggleCheckOutAllCheckBox(isCheckOutAll());
             checkBoxChangedListener.updateTotal(cartSumTotal());
         });
     }
@@ -105,12 +102,12 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
     public class CartItemViewHolder extends RecyclerView.ViewHolder {
 
-        private ConstraintLayout parent;
-        private ImageView itemImg;
-        private TextView itemName, itemDiscount, itemPrice;
-        private CheckBox itemCheckBox;
-        private EditText itemQuantity;
-        private ImageButton btnMinus, btnPlus;
+        private final ConstraintLayout parent;
+        private final ImageView itemImg;
+        private final TextView itemName, itemDiscount, itemPrice;
+        private final CheckBox itemCheckBox;
+        private final EditText itemQuantity;
+        private final ImageButton btnMinus, btnPlus;
         private double price;
 
         public CartItemViewHolder(@NonNull @NotNull View itemView) {

@@ -1,5 +1,6 @@
 package com.hisu.hisumal.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,10 +33,12 @@ public class ProductSpecificationsFragment extends Fragment {
 
         initUI(productSpecificationView);
 
-        Product product = (Product) getArguments().getSerializable(ProductDetailFragment.PRODUCT_DETAIL_KEY);
-
-        if (product != null)
-            setUIData(product);
+        if (getArguments() != null) {
+            Product product = (Product) getArguments()
+                    .getSerializable(ProductDetailFragment.PRODUCT_DETAIL_KEY);
+            if (product != null)
+                setUIData(product);
+        }
 
         return productSpecificationView;
     }
@@ -53,6 +56,7 @@ public class ProductSpecificationsFragment extends Fragment {
         weight = productSpecificationView.findViewById(R.id.product_specification_weight);
     }
 
+    @SuppressLint("DefaultLocale")
     private void setUIData(Product product) {
         cpu.setText(product.getSpecification().getCpu());
         os.setText(product.getSpecification().getOs());
@@ -63,6 +67,6 @@ public class ProductSpecificationsFragment extends Fragment {
         gate.setText(product.getSpecification().getConnectionGate());
         keyboard.setText(product.getSpecification().getKeyboard());
         battery.setText(product.getSpecification().getBattery());
-        weight.setText(product.getSpecification().getWeight() + " Kg");
+        weight.setText(String.format("%f Kg", product.getSpecification().getWeight()));
     }
 }

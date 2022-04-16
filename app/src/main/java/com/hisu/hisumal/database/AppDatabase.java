@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.hisu.hisumal.dao.ProductDAO;
 import com.hisu.hisumal.dao.UserDAO;
 import com.hisu.hisumal.util.ImageTypeConverter;
 import com.hisu.hisumal.entity.Product;
@@ -32,4 +33,6 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract UserDAO userDAO();
+
+    public abstract ProductDAO productDAO();
 }

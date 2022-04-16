@@ -1,7 +1,6 @@
 package com.hisu.hisumal.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hisu.hisumal.ContainerActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.SliderAdapter;
-import com.hisu.hisumal.database.AppDatabase;
 import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.model.SliderItem;
 import com.hisu.hisumal.util.ImageConverterHelper;
@@ -31,6 +29,8 @@ import com.hisu.hisumal.util.ImageConverterHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -117,33 +117,15 @@ public class ProductDetailFragment extends Fragment {
         btnBuyNow = productDetailView.findViewById(R.id.btn_buy_now);
     }
 
-    private List<SliderItem> initSliderItem() {
-
-        List<com.hisu.hisumal.entity.Product> products
-                = AppDatabase.getInstance(getContext()).userDAO().getAllProducts();
-
-        List<SliderItem> items = new ArrayList<>();
-
-        com.hisu.hisumal.entity.Product product = products.get(0);
-
-        items.add(new SliderItem(ImageConverterHelper.getResourceIdFromString(getContext(),
-                product.getProductImages().get(1))));
-        items.add(new SliderItem(ImageConverterHelper.getResourceIdFromString(getContext(),
-                product.getProductImages().get(2))));
-        items.add(new SliderItem(ImageConverterHelper.getResourceIdFromString(getContext(),
-                product.getProductImages().get(3))));
-        items.add(new SliderItem(ImageConverterHelper.getResourceIdFromString(getContext(),
-                product.getProductImages().get(4))));
-
-        return items;
+    private List<SliderItem> initSliderItem(List<String> products) {
+        return products.stream()
+                .map(product -> new SliderItem(ImageConverterHelper
+                        .getResourceIdFromString(getContext(), product)))
+                .collect(Collectors.toList());
     }
 
     private void initFragmentData(Product product) {
-        sliderItems = initSliderItem();
-        sliderItems.add(0, new SliderItem(
-                ImageConverterHelper.getResourceIdFromString(getContext(),
-                        product.getProductImages().get(0))
-        ));
+        sliderItems = initSliderItem(product.getProductImages());
         productImg.setAdapter(new SliderAdapter(sliderItems));
         productIndicator.setViewPager(productImg);
 

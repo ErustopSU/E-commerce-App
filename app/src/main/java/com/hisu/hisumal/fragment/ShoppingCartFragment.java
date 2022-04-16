@@ -46,7 +46,7 @@ public class ShoppingCartFragment extends Fragment implements ICheckBoxChangedLi
 
         CartItemAdapter adapter = new CartItemAdapter(
                 getContext(),
-                AppDatabase.getInstance(getContext()).userDAO().getAllProducts()
+                AppDatabase.getInstance(getContext()).productDAO().getAllProducts()
                 , this);
 
         cartRecyclerView.setAdapter(adapter);

@@ -16,17 +16,15 @@ import com.hisu.hisumal.ContainerActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.CartItemAdapter;
 import com.hisu.hisumal.database.AppDatabase;
-import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.myInterface.ICheckBoxChangedListener;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 public class ShoppingCartFragment extends Fragment implements ICheckBoxChangedListener {
 
     private RecyclerView cartRecyclerView;
     private CheckBox cbxCheckOutAll;
-    private TextView txtSubTotal;
+    private TextView txtSubTotal, txtDeliveryCharge, txtTotal;
     private TextView btnCheckOut;
     private ContainerActivity activity;
 
@@ -40,6 +38,8 @@ public class ShoppingCartFragment extends Fragment implements ICheckBoxChangedLi
         cbxCheckOutAll = cartView.findViewById(R.id.cbx_buy_all);
         btnCheckOut = cartView.findViewById(R.id.check_out);
         txtSubTotal = cartView.findViewById(R.id.cart_sub_total);
+        txtDeliveryCharge = cartView.findViewById(R.id.cart_delivery_charges);
+        txtTotal = cartView.findViewById(R.id.cart_total);
 
         activity = (ContainerActivity) getActivity();
         activity.cartToolbarBackground();
@@ -56,7 +56,7 @@ public class ShoppingCartFragment extends Fragment implements ICheckBoxChangedLi
 
         cbxCheckOutAll.setOnClickListener(view -> {
             adapter.toggleAllCheckBox(cbxCheckOutAll.isChecked());
-            updateTotal(adapter.cartSumTotal());
+            updateTotal(adapter.cartSumTotal(), adapter.getDeliveryCharge());
         });
 
         return cartView;
@@ -67,7 +67,10 @@ public class ShoppingCartFragment extends Fragment implements ICheckBoxChangedLi
     }
 
     @Override
-    public void updateTotal(double total) {
-        txtSubTotal.setText(String.format("đ %s", new DecimalFormat("#,###").format(total)));
+    public void updateTotal(double total, double charge) {
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        txtSubTotal.setText(String.format("đ %s", formatter.format(total)));
+        txtDeliveryCharge.setText(String.format("đ %s", formatter.format(charge)));
+        txtTotal.setText(String.format("đ %s", formatter.format(total + charge)));
     }
 }

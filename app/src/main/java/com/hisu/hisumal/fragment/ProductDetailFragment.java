@@ -1,6 +1,9 @@
 package com.hisu.hisumal.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +29,9 @@ import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.model.SliderItem;
 import com.hisu.hisumal.util.ImageConverterHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -39,6 +40,7 @@ public class ProductDetailFragment extends Fragment {
     public static final String PRODUCT_DETAIL_KEY = "product";
 
     private ContainerActivity activity;
+    private Product product;
 
     private ViewPager2 productImg;
     private CircleIndicator3 productIndicator;
@@ -76,7 +78,7 @@ public class ProductDetailFragment extends Fragment {
         View productDetailView = inflater
                 .inflate(R.layout.fragment_product_detail, container, false);
 
-        Product product = (Product) getArguments().getSerializable(PRODUCT_DETAIL_KEY);
+        this.product = (Product) getArguments().getSerializable(PRODUCT_DETAIL_KEY);
 
         initFragmentUI(productDetailView);
         initFragmentData(product);
@@ -171,22 +173,57 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void addActionForBottomSheetOrderButtons() {
-        btnQuantityMinus.setOnClickListener(view -> {
-            int currentQuantity = getCurrentOrderQuantity();
-            if (currentQuantity > 1) {
-                currentQuantity--;
-                edtQuantity.setText(String.valueOf(currentQuantity));
-            } else if (currentQuantity == 1) {
-                btnQuantityMinus.setClickable(false);
-                return;
+        edtQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable == null || editable.toString().isEmpty()) return;
+
+                int quantityInStock = product.getQuantityInStock();
+                int orderQuantity = Integer.parseInt(editable.toString());
+
+                if (orderQuantity > quantityInStock) {
+                    showAlert(quantityInStock);
+                    edtQuantity.setText(String.valueOf(quantityInStock));
+                }
             }
         });
 
-        btnQuantityPlus.setOnClickListener(view -> {
-            if (!btnQuantityMinus.isClickable())
-                btnQuantityMinus.setClickable(true);
-            edtQuantity.setText(String.valueOf(getCurrentOrderQuantity() + 1));
+        btnQuantityMinus.setOnClickListener(view -> {
+            addActionForBtnMinus();
         });
+
+        btnQuantityPlus.setOnClickListener(view -> {
+            addActionForBtnPlus(product.getQuantityInStock());
+        });
+    }
+
+    private void addActionForBtnMinus() {
+        int currentQuantity = getCurrentOrderQuantity();
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            edtQuantity.setText(String.valueOf(currentQuantity));
+        } else if (currentQuantity == 1)
+            btnQuantityMinus.setClickable(false);
+    }
+
+    private void addActionForBtnPlus(int quantityInStock) {
+        if (!btnQuantityMinus.isClickable())
+            btnQuantityMinus.setClickable(true);
+
+        if (getCurrentOrderQuantity() >= quantityInStock) {
+            showAlert(quantityInStock);
+            return;
+        }
+
+        edtQuantity.setText(String.valueOf(getCurrentOrderQuantity() + 1));
     }
 
     private void setBottomSheetData(Product product) {
@@ -228,5 +265,11 @@ public class ProductDetailFragment extends Fragment {
     private void changeButtonState(int buttonText, int color) {
         btnOder.setText(getResources().getString(buttonText));
         btnOder.setBackgroundColor(ContextCompat.getColor(getContext(), color));
+    }
+
+    private void showAlert(int quantityInStock) {
+        new AlertDialog.Builder(getContext())
+                .setMessage("We only have " + quantityInStock + " quantity remaining for this item!")
+                .setPositiveButton("Ok", null).show();
     }
 }

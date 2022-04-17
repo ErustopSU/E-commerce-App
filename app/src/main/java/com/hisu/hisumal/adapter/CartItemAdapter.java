@@ -1,6 +1,9 @@
 package com.hisu.hisumal.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,29 +55,69 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull CartItemViewHolder holder, int position) {
-
         Product product = productList.get(position);
-        holder.itemImg.setImageResource(
-                ImageConverterHelper.getResourceIdFromString(context,
-                        product.getProductImages().get(0))
-        );
-        holder.itemName.setText(product.getProductName());
-        holder.itemDiscount.setText(product.getDiscountFormat());
-        holder.itemPrice.setText(product.getPriceFormat());
-        holder.price = product.getPrice();
+
+        holder.setItemData(product);
+
+        holder.itemQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable == null || editable.toString().isEmpty()) return;
+
+                int quantityInStock = product.getQuantityInStock();
+                int orderQuantity = Integer.parseInt(editable.toString());
+
+                if (orderQuantity > quantityInStock) {
+                    showAlert(quantityInStock);
+                    holder.itemQuantity.setText(String.valueOf(quantityInStock));
+                }
+
+                checkBoxChangedListener.updateTotal(cartSumTotal(), getDeliveryCharge());
+            }
+        });
+
+        holder.btnMinus.setOnClickListener(view -> {
+            int currentQuantity = holder.getCurrentOrderQuantity();
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                holder.itemQuantity.setText(String.valueOf(currentQuantity));
+            } else if (currentQuantity == 1)
+                holder.btnMinus.setClickable(false);
+        });
+
+        holder.btnPlus.setOnClickListener(view -> {
+            if (!holder.btnPlus.isClickable())
+                holder.btnPlus.setClickable(true);
+
+            if (holder.getCurrentOrderQuantity() >= product.getQuantityInStock()) {
+                showAlert(product.getQuantityInStock());
+                return;
+            }
+
+            holder.itemQuantity.setText(String.valueOf(holder.getCurrentOrderQuantity() + 1));
+        });
 
         cartItemViewHolders.add(holder);
-
-        holder.itemCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
-            cartFragment.toggleCheckOutAllCheckBox(isCheckOutAll());
-            checkBoxChangedListener.updateTotal(cartSumTotal());
-        });
     }
 
     @Override
     public int getItemCount() {
         if (productList == null || productList.isEmpty()) return 0;
         return productList.size();
+    }
+
+    private void showAlert(int quantityInStock) {
+        new AlertDialog.Builder(context)
+                .setMessage("We only have " + quantityInStock + " quantity remaining for this item!")
+                .setPositiveButton("Ok", null).show();
     }
 
     public void toggleAllCheckBox(boolean isChecked) {
@@ -94,6 +137,16 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         return sumTotal;
     }
 
+    public double getDeliveryCharge() {
+        double total = 0;
+
+        for (CartItemViewHolder holder : cartItemViewHolders)
+            if (holder.itemCheckBox.isChecked() && !holder.isFreeShip)
+                total += 20000;
+
+        return total;
+    }
+
     private boolean isCheckOutAll() {
         for (CartItemViewHolder cartItemViewHolder : cartItemViewHolders)
             if (!cartItemViewHolder.itemCheckBox.isChecked()) return false;
@@ -103,17 +156,19 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     public class CartItemViewHolder extends RecyclerView.ViewHolder {
 
         private final ConstraintLayout parent;
-        private final ImageView itemImg;
+        private final ImageView itemImg, itemFreeShip;
         private final TextView itemName, itemDiscount, itemPrice;
         private final CheckBox itemCheckBox;
         private final EditText itemQuantity;
         private final ImageButton btnMinus, btnPlus;
         private double price;
+        private boolean isFreeShip = false;
 
         public CartItemViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             parent = itemView.findViewById(R.id.cart_item_parent);
             itemImg = itemView.findViewById(R.id.cart_item_img);
+            itemFreeShip = itemView.findViewById(R.id.cart_item_free_ship);
             itemName = itemView.findViewById(R.id.cart_item_name);
             itemDiscount = itemView.findViewById(R.id.cart_item_discount);
             itemPrice = itemView.findViewById(R.id.cart_item_price);
@@ -121,6 +176,31 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             itemQuantity = itemView.findViewById(R.id.cart_item_edt_quantity);
             btnMinus = itemView.findViewById(R.id.cart_item_btn_minus);
             btnPlus = itemView.findViewById(R.id.cart_item_btn_add);
+        }
+
+        private void setItemData(Product product) {
+            itemImg.setImageResource(
+                    ImageConverterHelper.getResourceIdFromString(context,
+                            product.getProductImages().get(0))
+            );
+
+            itemName.setText(product.getProductName());
+            itemDiscount.setText(product.getDiscountFormat());
+            itemPrice.setText(product.getPriceFormat());
+            price = product.getPrice();
+            isFreeShip = product.isFreeShipping();
+
+            if (product.isFreeShipping())
+                itemFreeShip.setVisibility(View.VISIBLE);
+
+            itemCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
+                cartFragment.toggleCheckOutAllCheckBox(isCheckOutAll());
+                checkBoxChangedListener.updateTotal(cartSumTotal(), getDeliveryCharge());
+            });
+        }
+
+        private int getCurrentOrderQuantity() {
+            return Integer.parseInt(itemQuantity.getText().toString());
         }
     }
 }

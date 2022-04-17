@@ -50,11 +50,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 ImageConverterHelper.getResourceIdFromString(context,
                         product.getProductImages().get(0))
                 );
+
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(product.getPriceFormat());
 
         if (product.isFreeShipping())
-            holder.productFreeShipIcon.setImageResource(R.drawable.free_shipping);
+            holder.productFreeShipIcon.setVisibility(View.VISIBLE);
 
         holder.parent.setOnClickListener(view -> {
             Intent intent = new Intent(context, ContainerActivity.class);

@@ -29,11 +29,11 @@ public class MyApplication extends Application {
 
 //        createNotificationChannel();
 
-        LocalDataManager.init(getApplicationContext());
-        if (!LocalDataManager.getFirstTimeInstall()) {
-            LocalDataManager.setFirstTimeInstall(true);
-            initDatabase();
-        }
+//        LocalDataManager.init(getApplicationContext());
+//        if (!LocalDataManager.getFirstTimeInstall()) {
+//            LocalDataManager.setFirstTimeInstall(true);
+//            initDatabase();
+//        }
     }
 
     private void createNotificationChannel() {

@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:justificationMode="inter_word"
-            android:maxLines="3"
+            android:maxLines="2"
             android:text="Laptop Asus Gaming Rog Strix G15 G513IH HN015W"
             android:textColor="@color/black"
             android:textSize="14dp"
@@ -63,10 +63,12 @@
         <ImageView
             android:id="@+id/product_free_ship"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="25dp"
             app:layout_constraintBottom_toBottomOf="@+id/product_price"
             app:layout_constraintEnd_toEndOf="@+id/product_name"
             app:layout_constraintHorizontal_bias="1.0"
+            android:src="@drawable/free_shipping"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/product_price"
             app:layout_constraintTop_toTopOf="@+id/product_price"
             app:layout_constraintVertical_bias="0.476" />

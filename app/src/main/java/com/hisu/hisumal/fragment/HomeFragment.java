@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.hisu.hisumal.HomeActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.ProductAdapter;
 import com.hisu.hisumal.adapter.ProductTopSellAdapter;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
     private List<SliderItem> sliderItems;
     private Handler mBannerSliderHandler;
     private Runnable mBannerRunnable;
+    private HomeActivity homeActivity;
 
     //Top sell list
     private RecyclerView topSellRecyclerView;
@@ -95,6 +97,8 @@ public class HomeFragment extends Fragment {
     private List<Product> initProductData() {
         List<Product> products = new ArrayList<>();
         products = AppDatabase.getInstance(getContext()).productDAO().getAllProducts();
+        homeActivity = (HomeActivity) getActivity();
+        homeActivity.updateCartQuantityNotification(products.size());
         return products;
     }
 

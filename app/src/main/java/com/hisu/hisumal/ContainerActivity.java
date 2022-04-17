@@ -1,10 +1,12 @@
 package com.hisu.hisumal;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.badge.BadgeUtils;
 import com.hisu.hisumal.fragment.ProductDetailFragment;
 import com.hisu.hisumal.fragment.ShoppingCartFragment;
 import com.hisu.hisumal.entity.Product;
@@ -25,17 +29,20 @@ public class ContainerActivity extends AppCompatActivity {
 
     private FrameLayout mainContainer;
     private AppBarLayout appBarLayout;
+    private Toolbar mToolbar;
     private int modeMenu;
     private Menu myMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_container);
 
         appBarLayout = findViewById(R.id.app_bar_2);
 
-        Toolbar mToolbar = findViewById(R.id.my_toolbar_2);
+        mToolbar = findViewById(R.id.my_toolbar_2);
         setSupportActionBar(mToolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -137,5 +144,13 @@ public class ContainerActivity extends AppCompatActivity {
                 .replace(mainContainer.getId(), new ShoppingCartFragment())
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @SuppressLint("UnsafeOptInUsageError")
+    public void updateCartQuantityNotification(int quantity) {
+        BadgeDrawable badgeDrawable = BadgeDrawable.create(ContainerActivity.this);
+        badgeDrawable.setNumber(quantity);
+        badgeDrawable.setBackgroundColor(Color.parseColor("#ee4d2d"));
+        BadgeUtils.attachBadgeDrawable(badgeDrawable, mToolbar, R.id.toolbar_cart);
     }
 }

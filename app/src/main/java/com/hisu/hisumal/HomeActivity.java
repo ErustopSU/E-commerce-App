@@ -2,6 +2,7 @@ package com.hisu.hisumal;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -147,7 +148,8 @@ public class HomeActivity extends AppCompatActivity {
     @SuppressLint("UnsafeOptInUsageError")
     public void updateCartQuantityNotification(int quantity) {
         BadgeDrawable badgeDrawable = BadgeDrawable.create(HomeActivity.this);
-        badgeDrawable.setNumber(badgeDrawable.getNumber() + 1);
+        badgeDrawable.setNumber(quantity);
+        badgeDrawable.setBackgroundColor(Color.parseColor("#ee4d2d"));
         BadgeUtils.attachBadgeDrawable(badgeDrawable, mToolbar, R.id.toolbar_cart);
     }
 

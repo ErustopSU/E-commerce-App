@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hisu.hisumal.ContainerActivity;
+import com.hisu.hisumal.activity.ContainerActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.CartItemAdapter;
 import com.hisu.hisumal.database.AppDatabase;

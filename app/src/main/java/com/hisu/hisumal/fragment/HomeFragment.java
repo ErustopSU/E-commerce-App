@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +15,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.hisu.hisumal.HomeActivity;
+import com.hisu.hisumal.activity.HomeActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.adapter.ProductAdapter;
 import com.hisu.hisumal.adapter.ProductTopSellAdapter;
@@ -24,8 +23,6 @@ import com.hisu.hisumal.adapter.SliderAdapter;
 import com.hisu.hisumal.database.AppDatabase;
 import com.hisu.hisumal.entity.Product;
 import com.hisu.hisumal.model.SliderItem;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

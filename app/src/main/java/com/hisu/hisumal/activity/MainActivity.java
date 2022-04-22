@@ -1,4 +1,4 @@
-package com.hisu.hisumal;
+package com.hisu.hisumal.activity;
 
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.hisu.hisumal.R;
 import com.hisu.hisumal.fragment.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {

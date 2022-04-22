@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hisu.hisumal.ContainerActivity;
+import com.hisu.hisumal.activity.ContainerActivity;
 import com.hisu.hisumal.R;
 import com.hisu.hisumal.fragment.ProductDetailFragment;
 import com.hisu.hisumal.entity.Product;

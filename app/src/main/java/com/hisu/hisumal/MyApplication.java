@@ -10,10 +10,8 @@ import android.net.Uri;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hisu.hisumal.dao.ProductDAO;
-import com.hisu.hisumal.dao.UserDAO;
 import com.hisu.hisumal.database.AppDatabase;
 import com.hisu.hisumal.entity.Product;
-import com.hisu.hisumal.entity.Specification;
 import com.hisu.hisumal.util.LocalDataManager;
 
 import java.util.List;
@@ -26,35 +24,18 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-//        createNotificationChannel();
-
-//        LocalDataManager.init(getApplicationContext());
-//        if (!LocalDataManager.getFirstTimeInstall()) {
-//            LocalDataManager.setFirstTimeInstall(true);
-//            initDatabase();
-//        }
-    }
-
-    private void createNotificationChannel() {
-        int importance = NotificationManager.IMPORTANCE_HIGH;
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance);
-
-        AudioAttributes attributes = new AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_ALARM)
-                .build();
-
-        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        channel.setSound(uri, attributes);
-
-        NotificationManager manager = getSystemService(NotificationManager.class);
-        manager.createNotificationChannel(channel);
+        LocalDataManager.init(getApplicationContext());
+        if (!LocalDataManager.getFirstTimeInstall()) {
+            LocalDataManager.setFirstTimeInstall(true);
+            initDatabase();
+        }
     }
 
     private void initDatabase() {
         ProductDAO productDAO = AppDatabase.getInstance(getApplicationContext())
                 .productDAO();
+
+        productDAO.delete();
 
         String arr = "[" +
                 "{\"brand\":\"MSI\",\"description\":\"The MSI 15.6\\\" GE Series GE66 Raider Dragonshield Gaming Laptop combines both performance and aesthetics for gamers who want bit of flair. The bottom edge of the palm rest and its keys support customizable RGB lighting, which users can set to fit their style. This limited edition features the MSI Dragonshield logo and a sci-fi spaceship-themed design. Specs-wise, it\\u0027s equipped with a 2.4 GHz Intel Core i9-10980HK eight-core processor, 32GB of DDR4 RAM, a 1TB NVMe PCIe M.2 SSD, and an NVIDIA GeForce RTX 2070 SUPER graphics card. These enable the system to quickly load applications, multitask efficiently, and play graphically demanding games. MSI has also paired the hardware with a 1080p Full HD 300 Hz IPS display. Connectivity options include USB Type-A and Type-C, HDMI, Mini DisplayPort, SD media cards, Gigabit LAN, Wi-Fi 6, and Bluetooth 5.1. Other integrated features includes a webcam, microphones, speakers, and a combo audio jack. The operating system installed is Windows 10 Home.\",\"discount\":15.0,\"isFreeShipping\":true,\"price\":4.4999E7,\"productID\":0,\"productImages\":[\"R.drawable.laptop_1\",\"R.drawable.laptop_1_slide_1\",\"R.drawable.laptop_1_slide_2\",\"R.drawable.laptop_1_slide_3\",\"R.drawable.laptop_1_slide_4\"],\"productName\":\"Laptop MSI GE66 Raider 10SF 483VN Dragonshield Limited Edition\",\"quantityInStock\":4,\"rate\":5.0,\"specification\":{\"battery\":\"Li-Ion 4-Cell 99.9Wh\",\"connectionGate\":\"Killer ax Wi-Fi + Bluetooth v5.1\",\"cpu\":\"Intel® Core™ i7-10875H 2.30GHz - 5.10GHz 8 Cores 12 Threads\",\"gpu\":\"NVIDIA GeForce GTX 1650 4GB GDDR6 + Intel UHD Graphics\",\"hardDrive\":\"1 TB NVMe PCIe Gen3x4\",\"keyboard\":\"RGB Steel Series\",\"monitor\":\"15.6\\\" FHD (1920x1080)\",\"os\":\"Windows 11 SL 64 Bit\",\"ram\":\"16GB (8GB x2) DDR4 3200MHz Max 64GB\",\"weight\":2.38}},"

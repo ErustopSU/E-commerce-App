@@ -1,4 +1,4 @@
-package com.hisu.hisumal;
+package com.hisu.hisumal.activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
+import com.hisu.hisumal.R;
 import com.hisu.hisumal.fragment.ProductDetailFragment;
 import com.hisu.hisumal.fragment.ShoppingCartFragment;
 import com.hisu.hisumal.entity.Product;

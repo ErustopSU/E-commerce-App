@@ -17,9 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.hisu.hisumal.HomeActivity;
+import com.hisu.hisumal.activity.HomeActivity;
 import com.hisu.hisumal.R;
-import com.hisu.hisumal.fragment.LoginFragment;
 
 public class RegisterFragment extends Fragment {
 
@@ -147,8 +146,6 @@ public class RegisterFragment extends Fragment {
             mEdtConfirmPwd.requestFocus();
             return false;
         }
-
-        //Todo: Add logic to check existed user account here
 
         return true;
     }

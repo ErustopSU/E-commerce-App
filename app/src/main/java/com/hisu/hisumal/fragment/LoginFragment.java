@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.hisu.hisumal.HomeActivity;
+import com.hisu.hisumal.activity.HomeActivity;
 import com.hisu.hisumal.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -72,7 +72,7 @@ public class LoginFragment extends Fragment {
         mTxtInputLayoutPwd = view.findViewById(R.id.textInputLayout2);
 
         btnLogin = view.findViewById(R.id.btn_login);
-//        changeButtonState(false, BTN_DISABLE);
+        changeButtonState(false, BTN_DISABLE);
     }
 
     private void changeButtonState(boolean state, String color) {
@@ -91,9 +91,8 @@ public class LoginFragment extends Fragment {
     private void addActionForBtnLogin() {
         btnLogin.setOnClickListener(view1 -> {
 
-            //Todo: Uncomment this line to check for log in logic, to ez to ICheckBoxChangedListener, i comment this line :v
-//            if (!isValidAccount(mEdtUserName.getText().toString().trim(), mEdtPwd.getText().toString().trim()))
-//                return;
+            if (!isValidAccount(mEdtUserName.getText().toString().trim(), mEdtPwd.getText().toString().trim()))
+                return;
 
             Intent intent = new Intent(getContext(), HomeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -109,15 +108,6 @@ public class LoginFragment extends Fragment {
             mEdtUserName.requestFocus();
             return false;
         }
-
-        //Mock up user account
-        if (!(userName.equals("harry") && password.equals("123Nguyen"))) {
-            mEdtUserName.setError("Username or Password not correct!");
-            mEdtUserName.requestFocus();
-            return false;
-        }
-
-        //Todo: Add logic to check for user account here
         return true;
     }
 

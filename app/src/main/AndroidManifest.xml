@@ -15,15 +15,12 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".ContainerActivity"
-            android:parentActivityName=".HomeActivity" />
-        <!--        <activity-->
-        <!--            android:name=".HomeActivity"-->
-        <!--            android:parentActivityName=".MainActivity" />-->
+            android:name=".activity.ContainerActivity"
+            android:parentActivityName=".activity.HomeActivity" />
+        <activity android:name=".activity.HomeActivity" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="true"
-            android:parentActivityName=".MainActivity">
+            android:name=".activity.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

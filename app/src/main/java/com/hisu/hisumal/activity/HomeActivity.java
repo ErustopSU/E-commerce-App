@@ -1,10 +1,9 @@
-package com.hisu.hisumal;
+package com.hisu.hisumal.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,12 +22,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.hisu.hisumal.entity.Product;
-import com.hisu.hisumal.entity.Specification;
+import com.hisu.hisumal.R;
 import com.hisu.hisumal.fragment.HomeFragment;
-
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

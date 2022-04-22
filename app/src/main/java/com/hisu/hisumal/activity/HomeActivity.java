@@ -63,13 +63,10 @@ public class HomeActivity extends AppCompatActivity {
             socialMedia[i].setOnClickListener(view -> openApp(followUrls[finalI]));
         }
 
-        //Todo: add event for navigation item click
-//        mNavigationView.setNavigationItemSelectedListener(item -> {
-//            int selectedItemID = item.getItemId();
-//
-//            mDrawerLayout.closeDrawer(GravityCompat.START);
-//            return true;
-//        });
+        mNavigationView.setNavigationItemSelectedListener(item -> {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
 
         getSupportFragmentManager().beginTransaction()
                 .add(mFragmentContainer.getId(), new HomeFragment())
@@ -109,7 +106,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void openApp(String appName) {
-        //Todo: add code to open app, this line is just a mockup
         Toast.makeText(this, appName, Toast.LENGTH_SHORT).show();
     }
 
